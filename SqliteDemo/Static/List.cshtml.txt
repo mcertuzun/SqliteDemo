@@ -1,0 +1,13 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using SqliteDemo.Models.Entity;
+
+@model Book[]
+<h4>Book List</h4>
+<ul>
+    @foreach (Book book in Model)
+    {
+        <li>@book.Title,  @book.ISBN,  @book.DateAdded.ToString("d MMM yyyy")</li>
+    }
+</ul>

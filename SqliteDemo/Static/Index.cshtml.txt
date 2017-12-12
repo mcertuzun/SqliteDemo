@@ -1,0 +1,16 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Home Page";
+}
+
+<h4>Library Management System</h4>
+
+<ul>
+    <li><a href="~/Home/InitDb">Initialize the Database</a></li>
+	<li></li>
+    <li><a href="~/Book/List">List All Books</a></li>
+	<li><a href="~/Book/AddBook">Add a Book</a></li>
+	<li><a href="~/Book/DeleteBook">Delete a Book</a></li>
+    <li><a href="~/Book/ChangeBook">Change a Book</a></li>
+</ul>
+

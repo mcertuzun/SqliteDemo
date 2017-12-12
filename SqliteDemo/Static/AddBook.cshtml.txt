@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "AddBook";
+}
+@using SqliteDemo.Models.Entity;
+@model Book
+
+<h2>AddBook</h2>
+
+<form method="post" action="~/Book/AddBook">
+
+    <p><label>Title: <input type="text" name="Title" value="@Model.Title" /></label></p>
+    <p><label>ISBN: <input type="text" name="ISBN" value="@Model.ISBN" /></label></p>
+    <p><input type="submit" value="Add Book" /></p>
+
+</form>

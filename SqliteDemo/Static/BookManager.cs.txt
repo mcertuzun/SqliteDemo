@@ -1,0 +1,69 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using SqliteDemo.Models.Entity;
+using SqliteDemo.Models.Repository;
+
+namespace SqliteDemo.Models.Transaction
+{
+    public class BookManager
+    {
+
+        public static Book[] GetAllBooks()
+        {
+            List<Book> books = BookPersistence.GetAllBooks();
+            if (books != null)
+            {
+                return BookPersistence.GetAllBooks().ToArray();
+            }
+            else
+            {
+                 return (new Book[0]);
+            }
+        }
+
+        /*
+         * Transaction: Add a new book to the database
+         * Returns true iff the new book has a unique ISBN
+         * and it was successfully added.
+         */
+        public static bool AddNewBook(Book newBook)
+        {
+            // Verify that the book doesn't already exist
+            Book oldBook = BookPersistence.getBook(newBook);
+            // oldBook should be null, if this is a new book
+            if (oldBook != null) 
+            {
+                return false;
+            }
+
+            // set tomorrow as the official date added
+            newBook.DateAdded = DateTime.Now;
+            newBook.DateAdded.AddDays(1);  
+
+            return BookPersistence.AddBook(newBook);
+        }
+
+        /*
+         * Transaction: Delete a book from the database
+         * Returns true iff the book exists in the database and
+         * it was successfully deleted.
+         */
+        public static bool DeleteBook(Book delBook)
+        {
+            return false;
+        }
+
+
+        /*
+         * Transaction: Update a book in the database
+         * Returns true iff the book exists in the database and
+         * it was successfully changed.
+         */
+        public static bool ChangeBook(Book delBook)
+        {
+            return false;
+        }
+    }
+}
