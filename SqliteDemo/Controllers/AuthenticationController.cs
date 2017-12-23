@@ -15,11 +15,15 @@ namespace SqliteDemo.Controllers
         {
             return View();
         }
-
+        [HttpGet]
+        public ActionResult Register()
+        {
+            return View(new User());
+        }
         [HttpGet]
         public ActionResult Login()
         {
-            return View(new Credential());
+            return View();
         }
         [HttpPost]
         public ActionResult Login(Credential cr)
