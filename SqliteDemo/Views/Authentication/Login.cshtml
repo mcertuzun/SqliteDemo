@@ -1,13 +1,13 @@
 ﻿@using SqliteDemo.Models.Entity;
-@model Credential
+@model User
 @{
     ViewBag.Title = "Login";
 }
 <h2>Login</h2>
 
 <form action="~/Authentication/Login" method="post">
-    Userid: <input name="UserId" value="@Model.UserId" type="text" />
-    Password: <input name="Password" value="@Model.Password" type="password" />
+    Userid: <input name="UserId" value="@Model.name" type="text" />
+    Password: <input name="Password" value="@Model.password" type="password" />
 
     <label>Login<input type="submit" value="Login" name="Login" /></label>
 </form>

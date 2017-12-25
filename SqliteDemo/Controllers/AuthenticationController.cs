@@ -64,22 +64,22 @@ namespace SqliteDemo.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Login(User cr)
+        public ActionResult Login(User us)
         {
-            if (cr == null)
+            if (us == null)
             {
-                return View(new Credential());
+                return View(new User());
             }
-            if (( (cr.Password == null) || (cr.Password.Length == 0)))
+            if (( (us.password == null) || (us.password.Length == 0)))
             {
                 TempData["message"] = "UserId and Password needed";
-                return View(cr);
+                return View(us);
                 
             }
             else
             {
-                
-               bool control = UserManager.AuthenticateUser(cr, Session);
+                //BURADA KALDIM 25122017
+               bool control = UserManager.AuthenticateUser(us, Session);
 
                  if (control)
                  {
@@ -89,7 +89,7 @@ namespace SqliteDemo.Controllers
                  else
                  {
                      TempData["message"] = " Invalid Login credentials";
-                     return View(cr);
+                     return View(us);
                  }
 
 
