@@ -57,7 +57,27 @@ namespace SqliteDemo.Models.Repository
 
             return events;
         }
+        public static Events getEvent(Events keyEvent)
+        {
+            string sqlQuery = "select * from events where eventId=" + keyEvent.eventId;
+            List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
+            //System.Console.WriteLine("$$rows: " + rows.Count);
+            if (rows.Count == 0)
+            {
+                return null;
+            }
 
+            // Use the data from the first returned row (should be the only one) to create a Book.
+            object[] dataRow = rows[0];
+
+            Events Event = new Events
+            {
+                eventId = (decimal)dataRow[0],
+                userId = (decimal)dataRow[1],
+                EventName = (string)dataRow[2]
+            };
+            return Event;
+        }
         public static bool AddEvent(Events Event)
         {
 
@@ -104,22 +124,7 @@ namespace SqliteDemo.Models.Repository
         }
 
 
-        public static Events getEvent(Events keyEvent)
-        {
-            string sqlQuery = "select * from events where eventId=" + keyEvent.eventId;
-            List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
-            //System.Console.WriteLine("$$rows: " + rows.Count);
-            if (rows.Count == 0)
-            {
-                return null;
-            }
-
-            // Use the data from the first returned row (should be the only one) to create a Book.
-            object[] dataRow = rows[0];
-
-            Events Event = new Events { eventId = (decimal)dataRow[0], userId = (decimal)dataRow[1], EventName = (string)dataRow[2] };
-            return Event;
-        }
+       
         /*
          * Get one user from the repository, identified by userId 
          */
