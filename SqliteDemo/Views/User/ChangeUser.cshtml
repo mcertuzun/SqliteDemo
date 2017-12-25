@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "ChangeUser";
+}
+@using SqliteDemo.Models.Entity;
+@model User
+<h2>ChangeUser</h2>
+<form action="~/User/ChangeUser" method="post">
+    Choose
+    Userid: <input name="UserId" value="@Model.Name" type="text" />
+    Password: <input name="Password" value="@Model.Password" type="password" />
+
+    <label>Login<input type="submit" value="Login" name="Login" /></label>
+</form>
+

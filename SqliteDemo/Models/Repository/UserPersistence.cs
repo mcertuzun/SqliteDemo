@@ -103,8 +103,8 @@ namespace SqliteDemo.Models.Repository
             * This method use a SQL format (update) to update the 
             * book's title with using it's ISBN number
             */
-            string sql = "Update user Set name='"
-                + changeUser.Name + "' Where id=" + changeUser.Id + ";";
+            string sql = "Update user Set Name='"
+                + changeUser.Name + "' Where Id=" + changeUser.Id + ";";
             RepositoryManager.Repository.DoCommand(sql);
             return true;
         }
@@ -116,7 +116,7 @@ namespace SqliteDemo.Models.Repository
             * book's title with using it's ISBN number
             */
             string sql = "Update user Set EmailAddress='"
-                + changeUser.EmailAddress + "' Where id=" + changeUser.Id + ";";
+                + changeUser.EmailAddress + "' Where Id=" + changeUser.Id + ";";
             RepositoryManager.Repository.DoCommand(sql);
             return true;
         }
