@@ -47,7 +47,6 @@ namespace SqliteDemo.Models.Repository
             return (decimal)rows.Count;
         }
 
-
         public static List<User> GetAllUsers()
         {
             List<User> users = new List<User>();
@@ -57,20 +56,20 @@ namespace SqliteDemo.Models.Repository
 
             foreach (object[] dataRow in rows)
             {
-             
-                User userEfe = new User
+
+                User usr = new User
                 {
-                    Id =(decimal) dataRow[0],
-                    Name = (string)dataRow[1],
-                    EmailAddress = (string)dataRow[2],
-                    Salt = (string)dataRow[3],
-                    HashPassword = (string)dataRow[4],
-                    IsAdmin = (decimal)dataRow[5],
-                    Status = (decimal)dataRow[6]
+                    Id =            (decimal) dataRow[0],
+                    Name =          (string)  dataRow[1],
+                    EmailAddress =  (string)  dataRow[2],
+                    Salt =          (string)  dataRow[3],
+                    HashPassword =  (string)  dataRow[4],
+                    IsAdmin =       (decimal) dataRow[5],
+                    Status =        (decimal) dataRow[6]
    
                 };
 
-                users.Add(userEfe);
+                users.Add(usr);
             }
 
             return users;

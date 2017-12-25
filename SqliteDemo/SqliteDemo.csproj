@@ -231,7 +231,7 @@
     <Content Include="Views\Event\AddEvent.cshtml" />
     <Content Include="Views\Event\DeleteEvent.cshtml" />
     <Content Include="Views\Event\UpdateEvent.cshtml" />
-    <Content Include="Views\User\ListUser.cshtml" />
+    <Content Include="Views\User\List.cshtml" />
     <Content Include="Views\Event\ListEvents.cshtml" />
   </ItemGroup>
   <ItemGroup>

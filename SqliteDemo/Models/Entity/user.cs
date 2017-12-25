@@ -26,10 +26,11 @@ namespace SqliteDemo.Models.Entity
             this.Id = Id;
             this.Name = Name;
             EmailAddress = EmailAddress1;
+            Salt = Salt1;
             HashPassword = Password;
             IsAdmin = IsAdmin1;
             Status = Status1;
-            Salt = Salt1;
+           
 
         }
         
