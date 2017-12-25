@@ -15,7 +15,7 @@ namespace SqliteDemo.Models.Entity
         public decimal Status { get; set; }
         public string Salt { get; set; }
         public string Password { get; set; }
-        public static decimal value=0;
+
         public User(decimal Id, string Name, string EmailAddress1, string Salt1, string Password,  decimal IsAdmin1, decimal Status1)
         {
             this.Id = Id;

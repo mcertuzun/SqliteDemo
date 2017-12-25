@@ -166,7 +166,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Entity\comment.cs" />
-    <Compile Include="Models\Entity\Credential.cs" />
     <Compile Include="Models\Entity\Events.cs" />
     <Compile Include="Models\Entity\User.cs" />
     <Compile Include="Models\Repository\EventPersistence.cs" />
@@ -232,8 +231,8 @@
     <Content Include="Views\Event\AddEvent.cshtml" />
     <Content Include="Views\Event\DeleteEvent.cshtml" />
     <Content Include="Views\Event\UpdateEvent.cshtml" />
-    <Content Include="Views\Event\ListEvent.cshtml" />
     <Content Include="Views\User\ListUser.cshtml" />
+    <Content Include="Views\Event\ListEvents.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
