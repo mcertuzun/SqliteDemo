@@ -1,5 +1,5 @@
 ﻿@using SqliteDemo.Models.Entity;
-@model Credential
+@model User
 @{
     ViewBag.Title = "Register";
 }
@@ -7,8 +7,10 @@
 <h2>Register</h2>
 
 <form action="~/Authentication/Register" method="post">
-    <input name="UserId" value="@Model.UserId" type="text" />
-    <input name="Password" value="@Model.Password" type="password" />
+ 
+   UserName: <input name="Name" value="@Model.name" type="text" /> <br />
+   Email:  <input name="EmailAddress" value="@Model.EmailAddress" type="text" /> <br />
+   Password: <input name="Password" value="@Model.password" type="password" /> <br />
 
-    <label>Login<input type="submit" value="Login" name="Login" /></label>
+    <label><input type="submit" value="Register" name="Register" /></label>
 </form>

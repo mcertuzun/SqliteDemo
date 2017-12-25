@@ -17,7 +17,7 @@ namespace SqliteDemo.Controllers
         {
             return View();
         }
-
+        
         /*
          * Initialize the database. This needs to be done only once, if the file
          * does not already exist.
@@ -29,5 +29,6 @@ namespace SqliteDemo.Controllers
                 "Repository Initialized" : "Repository Initialization Failed";
             return View("Index");
         }
+      
     }
 }

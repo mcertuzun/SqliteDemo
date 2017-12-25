@@ -5,18 +5,18 @@ using System.Web;
 
 namespace SqliteDemo.Models.Entity
 {
-    public class events
+    public class Events
     {
         public decimal eventId { get; set; }
         public decimal userId { get; set; }
         public string EventName { get; set; }
 
-        public events()
+        public Events()
         {
 
         }
 
-        public events(int eventId1, int userId1, string EventName1)
+        public Events(int eventId1, int userId1, string EventName1)
         {
             eventId = eventId1;
             EventName = EventName1;

@@ -14,13 +14,9 @@ namespace SqliteDemo.Models.Entity
         public int IsAdmin { get; set; }
         public int Status { get; set; }
         public string Salt { get; set; }
-
-        public User()
-        {
-
-        }
-
-        public User(decimal Id, string Name, string Password, string EmailAddress1, int IsAdmin1, int Status1,string Salt1)
+        public string password { get; set; }
+        public static decimal value=0;
+        public User(decimal Id, string Name, string Salt1, string Password, string EmailAddress1, int IsAdmin1, int Status1)
         {
             id = Id;
             name = Name;
@@ -29,6 +25,14 @@ namespace SqliteDemo.Models.Entity
             IsAdmin = IsAdmin1;
             Status = Status1;
             Salt = Salt1;
+
         }
+
+        public User()
+        {
+
+        }
+      
+        
     }
 }

@@ -1,0 +1,11 @@
+﻿@{
+    ViewBag.Title = "DeleteEvent";
+}
+@using SqliteDemo.Models.Entity;
+@model Events
+
+<form method="post" action="~/Event/DeleteEvent">
+    <p><label>Event Id: <input type="text" name="ISBN" value="@Model.eventId" /></label></p>
+    <p><input type="submit" value="Delete Event" /></p>
+</form>
+<h2>Delete Event</h2>

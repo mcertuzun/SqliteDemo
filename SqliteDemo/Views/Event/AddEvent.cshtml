@@ -1,0 +1,11 @@
+﻿@{
+    ViewBag.Title = "AddEvent";
+}
+@using SqliteDemo.Models.Entity;
+@model Events
+<h2>AddEvent</h2>
+<form method="post" action="~/Event/AddEvent">
+    <p><label>User Id: <input type="text" name="userId" value="@Model.userId" /></label></p>
+    <p><label>Event Name: <input type="text" name="EventName" value="@Model.EventName" /></label></p>
+    <p><input type="submit" value="Add Event" /></p>
+</form>

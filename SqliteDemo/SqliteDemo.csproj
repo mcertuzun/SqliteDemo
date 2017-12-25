@@ -158,6 +158,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
+    <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SecureController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -166,13 +167,15 @@
     </Compile>
     <Compile Include="Models\Entity\comment.cs" />
     <Compile Include="Models\Entity\Credential.cs" />
-    <Compile Include="Models\Entity\events.cs" />
+    <Compile Include="Models\Entity\Events.cs" />
     <Compile Include="Models\Entity\User.cs" />
+    <Compile Include="Models\Repository\EventPersistence.cs" />
     <Compile Include="Models\Repository\IRepository.cs" />
     <Compile Include="Models\Repository\RepositoryManager.cs" />
     <Compile Include="Models\Repository\SqliteRepository.cs" />
     <Compile Include="Models\Repository\UserPersistence.cs" />
     <Compile Include="Models\Transaction\EncryptionManager.cs" />
+    <Compile Include="Models\Transaction\EventManager.cs" />
     <Compile Include="Models\Transaction\UserManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -226,6 +229,10 @@
     <Content Include="Views\Authentication\Login.cshtml" />
     <Content Include="Views\User\AddUser.cshtml" />
     <Content Include="Views\Authentication\Register.cshtml" />
+    <Content Include="Views\Event\AddEvent.cshtml" />
+    <Content Include="Views\Event\DeleteEvent.cshtml" />
+    <Content Include="Views\Event\UpdateEvent.cshtml" />
+    <Content Include="Views\Event\ListEvent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

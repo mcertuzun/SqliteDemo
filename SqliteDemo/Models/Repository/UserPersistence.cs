@@ -7,27 +7,26 @@ namespace SqliteDemo.Models.Repository
 {
     public class UserPersistence
     {
+
+      
         private static List<User> users;
 
         static UserPersistence()
         {
             users = new List<User>();
 
-            string salt = EncryptionManager.PasswordSalt;
-            users.Add(new User
+        }
+        public static bool CheckUsername(User keyUser)
+        {
+            string sqlQuery = "select * from user where name='" + keyUser.name +"'";
+            List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
+          
+            if (rows.Count != 0 )
             {
-                id = 0,
-                name = "Efe",
-                EmailAddress= "efe@gmail.com",
-                Salt = salt,
-                HashPassword = EncryptionManager.EncodePassword("abc123", salt),
-                IsAdmin = 1,
-                Status = 1
-            });
+                return false;
 
-       //     User a = GetUser(0);
-        //    UserPersistence.AddUser(a);
-
+            }else
+            return true;
         }
         public static User GetUser(int userId)
         {
@@ -40,8 +39,14 @@ namespace SqliteDemo.Models.Repository
             }
             return null;
         }
-        
-        public static List<User> GetAllUsers()
+
+        public static decimal Countt()
+        { 
+            string sqlQuery = "select * from user";
+            List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
+            return (decimal)rows.Count;
+        }
+            public static List<User> GetAllUsers()
         {
             List<User> users = new List<User>();
 
@@ -51,17 +56,17 @@ namespace SqliteDemo.Models.Repository
             foreach (object[] dataRow in rows)
             {
              
-                User userEfe = new User
-                {
+                User userEfe = new User{
                     id =(decimal) dataRow[0],
                     name = (string)dataRow[1],
                     EmailAddress = (string)dataRow[2],
-                    HashPassword = (string)dataRow[3],
-                    IsAdmin = (int)dataRow[4],
-                    Status = (int)dataRow[5],
-                    Salt = (string)dataRow[6]
-         
+                    Salt = (string)dataRow[3],
+                    HashPassword = (string)dataRow[4],
+                    IsAdmin = (int)dataRow[5],
+                    Status = (int)dataRow[6]
+   
                 };
+
                 users.Add(userEfe);
             }
 
@@ -70,18 +75,21 @@ namespace SqliteDemo.Models.Repository
         
         public static bool AddUser(User user)
         {
-                    string sql = "insert into user (id, name, EmailAddress, HashPassword, IsAdmin, Status, Salt) values ("
-                + user.id + ", "
-                + user.name + ", "
-                + user.EmailAddress + ", "
-                + user.HashPassword + ", "
+            decimal num = UserPersistence.Countt();
+           
+                user.id = Countt();
+                string sql = "INSERT INTO [user]([id],[name] ,[EmailAddress] ,[salt] ,[HashedPassword],[IsAdmin],[Status])VALUES("
+                + user.id + ", '"
+                + user.name + "', '"
+                + user.EmailAddress + "', '"
+                + user.Salt + "', '"
+                + user.HashPassword + "', "
                 + user.IsAdmin + ", "
-                + user.Status + ", "
-                + user.Salt + ", " +  ")";
+                + user.Status + ");";
             RepositoryManager.Repository.DoCommand(sql);
             return true;
+        
         }
-
         /*
          * Update a book that is in the database, replacing all field values except
          * the key field.
@@ -112,26 +120,32 @@ namespace SqliteDemo.Models.Repository
         }
 
 
-
-        public static User getUser(User keyUser)
+        //It is get the user from id information.
+        public static User getUserDB(User keyUser)
         {
             string sqlQuery = "select * from user where id=" + keyUser.id;
             List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
-            //System.Console.WriteLine("$$rows: " + rows.Count);
+        
             if (rows.Count == 0)
             { 
                 return null;
             }
 
-            // Use the data from the first returned row (should be the only one) to create a Book.
+        // It is choosing first user.
             object[] dataRow = rows[0];
           
-            User user = new User { id = (decimal)dataRow[0], name = (string)dataRow[1], EmailAddress = (string)dataRow[2], HashPassword = (string)dataRow[3], IsAdmin = (int)dataRow[4], Status = (int)dataRow[5], Salt = (string)dataRow[6] };
+            User user = new User {
+                id = (decimal)dataRow[0],
+                name = (string)dataRow[1],
+                EmailAddress = (string)dataRow[2],
+                Salt = (string)dataRow[3],
+                HashPassword = (string)dataRow[4],
+                IsAdmin = (int)dataRow[5],
+                Status = (int)dataRow[6]
+            };
             return user;
         }
-        /*
-         * Get one user from the repository, identified by userId UNUTAN OROSPU ÇOÇUĞU
-         */
+      
        
         public static bool DeleteUser(User delUser)
         {

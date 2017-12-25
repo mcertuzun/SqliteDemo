@@ -8,20 +8,25 @@ namespace SqliteDemo.Models.Transaction
 {
     public class UserManager
     {
-
+        
+       
         public static bool AddNewUser(User newUser)
         {
-            // Verify that the book doesn't already exist
-            User oldUser = UserPersistence.getUser(newUser);
-            // oldBook should be null, if this is a new book
-            if (oldUser != null)
-            {
-                return false;
-            }
+  
+            bool userChecker = UserPersistence.CheckUsername(newUser);
 
-            // set tomorrow as the official date added
-      
-            return UserPersistence.AddUser(newUser);
+            // oldBook should be null, if this is a new book
+            if (userChecker == true)
+            {
+                // set tomorrow as the official date added
+                string salt = EncryptionManager.PasswordSalt;
+                newUser.HashPassword = EncryptionManager.EncodePassword(newUser.password, salt);
+                newUser.Salt = salt;
+                newUser.Status = 1;
+                newUser.IsAdmin = 0;
+                return UserPersistence.AddUser(newUser);
+            }
+                return false;
         }
 
 
@@ -32,7 +37,7 @@ namespace SqliteDemo.Models.Transaction
          */
         public static bool DeleteUser(User delUser)
         {
-            if (UserPersistence.getUser(delUser) == null)
+            if (UserPersistence.getUserDB(delUser) == null)
             {
                 return false;
             }
@@ -47,7 +52,7 @@ namespace SqliteDemo.Models.Transaction
          */
         public static bool ChangeUser(User changeUser)
         {
-            if (UserPersistence.getUser(changeUser) == null)
+            if (UserPersistence.getUserDB(changeUser) == null)
             {
                 return false;
             }
@@ -56,8 +61,8 @@ namespace SqliteDemo.Models.Transaction
 
         public static User[] GetAllUsers()
         {
-            List<User> books = UserPersistence.GetAllUsers();
-            if (books != null)
+            List<User> users = UserPersistence.GetAllUsers();
+            if (users != null)
             {
                 return UserPersistence.GetAllUsers().ToArray();
             }

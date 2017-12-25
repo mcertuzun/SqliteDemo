@@ -10,6 +10,7 @@ namespace SqliteDemo.Controllers
 {
     public class AuthenticationController : Controller
     {
+       
         // GET: Authentication
         public ActionResult Index()
         {
@@ -20,6 +21,43 @@ namespace SqliteDemo.Controllers
         {
             return View(new User());
         }
+
+        [HttpPost]
+        public ActionResult Register(User us)
+        {
+          
+            // Validate user data from the transaction
+            if (us == null)
+            {
+                ViewBag.message = "Error: Invalid Request - please try again";
+                return View(new User());
+            }
+            if (us.name == null || us.name.Length == 0)
+            {
+                ViewBag.message = "Error: A name is required";
+                return View(us);
+            }
+
+            //User value=new User();
+
+            // Add the user
+           
+            bool result = UserManager.AddNewUser(us);
+            if (result)
+            {
+                ViewBag.message = "User added";
+                
+            }
+            else
+            {
+                ViewBag.message = "That user could not be added";
+            }
+
+           // User[] users = UserManager.GetAllUsers();
+            return View(us);
+        }
+
+
         [HttpGet]
         public ActionResult Login()
         {

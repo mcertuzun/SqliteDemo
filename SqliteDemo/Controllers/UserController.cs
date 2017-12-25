@@ -15,7 +15,7 @@ namespace SqliteDemo.Controllers
          */
         public ActionResult List()
         {
-            User[] users = UserManager.GetAllUsers();
+            User[] users = UserManager.GetAllUsers(); 
             return View(users);
         }
 
