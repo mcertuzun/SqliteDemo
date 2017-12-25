@@ -26,6 +26,7 @@
                     <li><a href="~/Authentication/Register">Register Page</a></li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
+              
             </div>
         </div>
     </div>
@@ -33,7 +34,14 @@
     <p style="background:lightblue; padding:.5ex">@ViewBag.message</p>
     <hr />
     <p></p>
-    
+    @{
+        if (Session["LoggedIn"] == null || (bool)Session["LoggedIn"] == false)
+        {
+                    <li>@Html.ActionLink("Index", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Login", "Login", "Authentication")</li>
+                        <li>@Html.ActionLink("Register", "Register", "Authentication")</li>
+        }
+    }
    
     <div class="container body-content">
         @RenderBody()

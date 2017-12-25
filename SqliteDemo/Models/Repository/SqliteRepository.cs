@@ -116,7 +116,7 @@ namespace SqliteTest.Models.Repository
             bool openResult = Open();
             if (success & openResult)
             {
-                string sql = "CREATE TABLE user (id DECIMAL, name VARCHAR(25),EmailAddress VARCHAR(50),salt VARCHAR(150), HashedPassword VARCHAR(150), IsAdmin Integer, Status Integer, PRIMARY KEY(id))";
+                string sql = "CREATE TABLE user (id DECIMAL, name VARCHAR(25),EmailAddress VARCHAR(50),salt VARCHAR(150), HashedPassword VARCHAR(150), IsAdmin decimal, Status decimal, PRIMARY KEY(id))";
                 DoCommand(sql);
                
 
