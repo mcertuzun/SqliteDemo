@@ -20,7 +20,7 @@ namespace SqliteDemo.Models.Repository
         {
             string sqlQuery = "select * from events";
             List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
-            return (decimal)rows.Count;
+            return rows.Count;
         }
 
         public static Events GetEvent(int eventId)
@@ -78,7 +78,8 @@ namespace SqliteDemo.Models.Repository
 
        public static bool CheckEventname(Events keyEvent)
         {
-            string sqlQuery = "select * from events where name='" + keyEvent.EventName + "'";
+            
+            string sqlQuery = "select * from events where EventName='" + keyEvent.EventName + "'";
             List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
 
             if (rows.Count != 0)
