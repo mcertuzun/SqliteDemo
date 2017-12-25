@@ -46,7 +46,9 @@ namespace SqliteDemo.Models.Repository
             List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
             return (decimal)rows.Count;
         }
-            public static List<User> GetAllUsers()
+
+
+        public static List<User> GetAllUsers()
         {
             List<User> users = new List<User>();
 
@@ -56,7 +58,8 @@ namespace SqliteDemo.Models.Repository
             foreach (object[] dataRow in rows)
             {
              
-                User userEfe = new User{
+                User userEfe = new User
+                {
                     Id =(decimal) dataRow[0],
                     Name = (string)dataRow[1],
                     EmailAddress = (string)dataRow[2],

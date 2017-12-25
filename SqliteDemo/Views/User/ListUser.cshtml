@@ -4,9 +4,30 @@
 @using SqliteDemo.Models.Entity;
 @model User[]
 <h4>User List</h4>
-<ul>
+
+<table style="width:100%">
+    <tr>
+        <th>User ID</th>
+        <th>User Name</th>
+        <th>Email</th>
+        <th>Salt</th>
+        <th>HashPassword</th>
+        <th>Admin</th>
+        <th>Status</th>
+    </tr>
+
     @foreach (User users in Model)
     {
-        <li>@users.id,  @users.name,  @users.EmailAddress, @users.Salt, @users.HashPassword, @users.IsAdmin, @users.Status</li>
+
+        <tr>
+            <td>@users.Id</td>
+            <td>@users.Name</td>
+            <td>@users.EmailAddress</td>
+            <td>@users.Salt</td>
+            <td>@users.HashPassword</td>    
+            <td>@users.IsAdmin</td>
+            <td>@users.Status</td>
+        </tr>
     }
-</ul>
+</table>
+
