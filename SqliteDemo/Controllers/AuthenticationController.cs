@@ -64,7 +64,7 @@ namespace SqliteDemo.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Login(Credential cr)
+        public ActionResult Login(User cr)
         {
             if (cr == null)
             {

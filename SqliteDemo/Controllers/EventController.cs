@@ -10,6 +10,7 @@ namespace SqliteDemo.Controllers
 {
     public class EventController : Controller
     {
+
         public ActionResult ListEvents()
         {
             Events[] event1 = EventManager.GetAllEvents();

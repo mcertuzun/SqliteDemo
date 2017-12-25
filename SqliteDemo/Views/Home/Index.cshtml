@@ -7,13 +7,30 @@
 
 
 
+<div class="jumbotron">
+    <h1>ASP.NET</h1>
+    <p class="lead">Push it</p>
+    <p><a href="~/Home/InitDb" class="btn btn-primary btn-lg">Initialize the Database</a></p>
+</div>
 
-<ul>
-    <a href="~/Home/InitDb">Initialize the Database</a>
-    <a href="~/Authentication/Login">Login Page</a>
-    <a href="~/Authentication/Register">Register Page</a>
-    <li><a href="~/Event/ListEvents">List All Events</a></li>
-    <li><a href="~/Event/AddEvent">Add an Event</a></li>
-    <li><a href="~/Event/DeleteEvent">Delete an Event</a></li>
-    <li><a href="~/Event/UpdateEvent">Change an Event</a></li>
-</ul>
+<div class="row">
+    <div class="col-md-4">
+        <h2>AdminPage</h2>
+        <p>
+          Only admin
+
+            <ul>
+
+                <li><a href="~/Event/ListEvents">List All Events</a></li>
+                <li><a href="~/Event/AddEvent">Add an Event</a></li>
+                <li><a href="~/Event/DeleteEvent">Delete an Event</a></li>
+                <li><a href="~/Event/UpdateEvent">Change an Event</a></li>
+
+
+            </ul>
+        </p>
+        <p><a class="btn btn-default" href="">Control Events &raquo;</a></p>
+    </div>
+  
+</div>
+

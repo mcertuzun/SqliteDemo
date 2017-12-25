@@ -71,16 +71,16 @@ namespace SqliteDemo.Models.Transaction
                 return (new User[0]);
             }
         }
-        public static bool AuthenticateUser(Credential cr, HttpSessionStateBase session)
+        public static bool AuthenticateUser(User cr, HttpSessionStateBase session)
         {
             session["LoggedIn"] = false;
             session["IsAdmin"] = false;
-            User user = UserPersistence.GetUser(cr.UserId);
+            User user = UserPersistence.getUserDB(cr);
             if (user == null)
             {
                 return false;
             }
-            var hash = EncryptionManager.EncodePassword(cr.Password, user.Salt);
+            var hash = EncryptionManager.EncodePassword(cr.password, user.Salt);
             if (hash == user.HashPassword)
             {      
                 session["LoggedIn"] = true;
