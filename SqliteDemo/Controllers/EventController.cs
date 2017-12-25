@@ -12,7 +12,13 @@ namespace SqliteDemo.Controllers
     {
         public ActionResult ListEvents()
         {
+            
             Events[] event1 = EventManager.GetAllEvents();
+            if (event1.Length == 0)
+            {
+                ViewBag.message = "There is not event";
+                return View();
+            }
             return View(event1);
         }
 
@@ -36,13 +42,16 @@ namespace SqliteDemo.Controllers
             if (result)
             {
                 ViewBag.message = "Event Deleted";
+                Events[] events = EventManager.GetAllEvents();
+
+                return View("ListEvents", events);
             }
             else
             {
                 ViewBag.message = "That event could not be deleted";
+                return View(newEvent);
             }
-            Events[] events = EventManager.GetAllEvents();
-            return View("ListEvents", events);
+         
         }
         
 

@@ -40,8 +40,7 @@ namespace SqliteDemo.Models.Transaction
             }
             return EventPersistence.DeleteEvent(delEvent);
         }
-
-
+       
         /*
          * Transaction: Update a book in the database
          * Returns true iff the book exists in the database and
