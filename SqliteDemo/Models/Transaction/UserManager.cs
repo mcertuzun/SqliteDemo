@@ -22,7 +22,7 @@ namespace SqliteDemo.Models.Transaction
                 string salt = EncryptionManager.PasswordSalt;
                 newUser.HashPassword = EncryptionManager.EncodePassword(newUser.password, salt);
                 newUser.Salt = salt;
-                newUser.Status = 1;
+                newUser.Status = 0;
                 newUser.IsAdmin = 0;
                 return UserPersistence.AddUser(newUser);
             }
@@ -73,7 +73,7 @@ namespace SqliteDemo.Models.Transaction
         }
         public static bool AuthenticateUser(User cr, HttpSessionStateBase session)
         {
-            session["LoggedIn"] = false;
+            session["Status"] = false;
             session["IsAdmin"] = false;
             User user = UserPersistence.getUserDB(cr);
             if (user == null)
@@ -84,7 +84,7 @@ namespace SqliteDemo.Models.Transaction
             if (hash == user.HashPassword)
             {      
                 session["LoggedIn"] = true;
-                session["IsAdmin"] = user.IsAdmin;
+                session["Status"] = user.IsAdmin;
                 return true;
             }
             else return false;
