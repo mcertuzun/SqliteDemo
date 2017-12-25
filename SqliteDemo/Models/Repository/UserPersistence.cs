@@ -28,7 +28,7 @@ namespace SqliteDemo.Models.Repository
             }else
             return true;
         }
-        public static User GetUser(int userId)
+        public static User GetUser(decimal userId)
         {
             foreach (User user in users)
             {
@@ -62,8 +62,8 @@ namespace SqliteDemo.Models.Repository
                     EmailAddress = (string)dataRow[2],
                     Salt = (string)dataRow[3],
                     HashPassword = (string)dataRow[4],
-                    IsAdmin = (int)dataRow[5],
-                    Status = (int)dataRow[6]
+                    IsAdmin = (decimal)dataRow[5],
+                    Status = (decimal)dataRow[6]
    
                 };
 
@@ -140,8 +140,8 @@ namespace SqliteDemo.Models.Repository
                 EmailAddress = (string)dataRow[2],
                 Salt = (string)dataRow[3],
                 HashPassword = (string)dataRow[4],
-                IsAdmin = (int)dataRow[5],
-                Status = (int)dataRow[6]
+                IsAdmin = (decimal)dataRow[5],
+                Status = (decimal)dataRow[6]
             };
             return user;
         }
