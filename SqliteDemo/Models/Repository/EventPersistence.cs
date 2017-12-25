@@ -20,8 +20,9 @@ namespace SqliteDemo.Models.Repository
         {
             string sqlQuery = "select * from events";
             List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
-            return (decimal)rows.Count;
+            return rows.Count;
         }
+
         public static Events GetEvent(int eventId)
         {
             foreach (Events Event in events)
@@ -75,9 +76,10 @@ namespace SqliteDemo.Models.Repository
          * Return false if the book is not found, based on key field match.
          */
 
-       /* public static bool CheckEventname(User keyEvent)
+       public static bool CheckEventname(Events keyEvent)
         {
-            string sqlQuery = "select * from events where name='" + keyEvent. + "'";
+            
+            string sqlQuery = "select * from events where EventName='" + keyEvent.EventName + "'";
             List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
 
             if (rows.Count != 0)
@@ -87,7 +89,7 @@ namespace SqliteDemo.Models.Repository
             }
             else
                 return true;
-        }*/
+        }
 
         public static bool UpdateEventName(Events changeName)
         {
