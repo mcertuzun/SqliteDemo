@@ -18,7 +18,7 @@ namespace SqliteDemo.Models.Repository
         }
         public static bool CheckUsername(User keyUser)
         {
-            string sqlQuery = "select * from user where name='" + keyUser.name +"'";
+            string sqlQuery = "select * from user where name='" + keyUser.Name +"'";
             List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
           
             if (rows.Count != 0 )
@@ -32,7 +32,7 @@ namespace SqliteDemo.Models.Repository
         {
             foreach (User user in users)
             {
-                if (userId == user.id)
+                if (userId == user.Id)
                 {
                     return user;
                 }
@@ -57,8 +57,8 @@ namespace SqliteDemo.Models.Repository
             {
              
                 User userEfe = new User{
-                    id =(decimal) dataRow[0],
-                    name = (string)dataRow[1],
+                    Id =(decimal) dataRow[0],
+                    Name = (string)dataRow[1],
                     EmailAddress = (string)dataRow[2],
                     Salt = (string)dataRow[3],
                     HashPassword = (string)dataRow[4],
@@ -77,10 +77,10 @@ namespace SqliteDemo.Models.Repository
         {
             decimal num = UserPersistence.Countt();
            
-                user.id = Countt();
+                user.Id = Countt();
                 string sql = "INSERT INTO [user]([id],[name] ,[EmailAddress] ,[salt] ,[HashedPassword],[IsAdmin],[Status])VALUES("
-                + user.id + ", '"
-                + user.name + "', '"
+                + user.Id + ", '"
+                + user.Name + "', '"
                 + user.EmailAddress + "', '"
                 + user.Salt + "', '"
                 + user.HashPassword + "', "
@@ -102,7 +102,7 @@ namespace SqliteDemo.Models.Repository
             * book's title with using it's ISBN number
             */
             string sql = "Update user Set name='"
-                + changeUser.name + "' Where id=" + changeUser.id + ";";
+                + changeUser.Name + "' Where id=" + changeUser.Id + ";";
             RepositoryManager.Repository.DoCommand(sql);
             return true;
         }
@@ -114,7 +114,7 @@ namespace SqliteDemo.Models.Repository
             * book's title with using it's ISBN number
             */
             string sql = "Update user Set EmailAddress='"
-                + changeUser.EmailAddress + "' Where id=" + changeUser.id + ";";
+                + changeUser.EmailAddress + "' Where id=" + changeUser.Id + ";";
             RepositoryManager.Repository.DoCommand(sql);
             return true;
         }
@@ -123,7 +123,7 @@ namespace SqliteDemo.Models.Repository
         //It is get the user from id information.
         public static User getUserDB(User keyUser)
         {
-            string sqlQuery = "select * from user where name='" + keyUser.name+"'";
+            string sqlQuery = "select * from user where name='" + keyUser.Name+"'";
             List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
         
             if (rows.Count == 0)
@@ -135,8 +135,8 @@ namespace SqliteDemo.Models.Repository
             object[] dataRow = rows[0];
           
             User user = new User {
-                id = (decimal)dataRow[0],
-                name = (string)dataRow[1],
+                Id = (decimal)dataRow[0],
+                Name = (string)dataRow[1],
                 EmailAddress = (string)dataRow[2],
                 Salt = (string)dataRow[3],
                 HashPassword = (string)dataRow[4],
@@ -149,7 +149,7 @@ namespace SqliteDemo.Models.Repository
        
         public static bool DeleteUser(User delUser)
         {
-            string sql = "delete from user where id=" + delUser.id;
+            string sql = "delete from user where id=" + delUser.Id;
             if (RepositoryManager.Repository.DoCommand(sql) == 1)
             {
                 return true;

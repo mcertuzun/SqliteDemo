@@ -32,7 +32,7 @@ namespace SqliteDemo.Controllers
                 ViewBag.message = "Error: Invalid Request - please try again";
                 return View(new User());
             }
-            if (us.name == null || us.name.Length == 0)
+            if (us.Name == null || us.Name.Length == 0)
             {
                 ViewBag.message = "Error: A name is required";
                 return View(us);
@@ -70,7 +70,7 @@ namespace SqliteDemo.Controllers
             {
                 return View(new User());
             }
-            if (( (us.password == null) || (us.password.Length == 0)))
+            if (( (us.Password == null) || (us.Password.Length == 0)))
             {
                 TempData["message"] = "UserId and Password needed";
                 return View(us);

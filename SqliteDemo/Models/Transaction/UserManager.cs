@@ -20,7 +20,7 @@ namespace SqliteDemo.Models.Transaction
             {
                 // set tomorrow as the official date added
                 string salt = EncryptionManager.PasswordSalt;
-                newUser.HashPassword = EncryptionManager.EncodePassword(newUser.password, salt);
+                newUser.HashPassword = EncryptionManager.EncodePassword(newUser.Password, salt);
                 newUser.Salt = salt;
                 newUser.Status = 0;
                 newUser.IsAdmin = 0;
@@ -81,7 +81,7 @@ namespace SqliteDemo.Models.Transaction
             {
                 return false;
             }
-            var hash = EncryptionManager.EncodePassword(cr.password, user.Salt);
+            var hash = EncryptionManager.EncodePassword(cr.Password, user.Salt);
             if (hash == user.HashPassword)
             {      
                 session["LoggedIn"] = true;
