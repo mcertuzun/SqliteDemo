@@ -11,19 +11,18 @@ namespace SqliteDemo.Models.Transaction
     {
         public static bool AddNewEvent(Events newEvent)
         {
-            // Verify that the book doesn't already exist
-            Events oldEvent = EventPersistence.getEvent(newEvent);
-            // oldBook should be null, if this is a new book
-            if (oldEvent != null)
-            {
-                return false;
-            }
-            //int count;
-            //newEvent.eventId = 0;
-            //newEvent.eventId = newEvent.eventId + 1;
-            // set tomorrow as the official date added
 
-            return EventPersistence.AddEvent(newEvent);
+
+            bool eventChecker = EventPersistence.CheckEventname(newEvent);
+
+            Events oldEvent = EventPersistence.getEvent(newEvent);
+          
+            if (eventChecker == true)
+            {
+                return EventPersistence.AddEvent(newEvent);
+            }
+  
+            return false;
         }
 
 
