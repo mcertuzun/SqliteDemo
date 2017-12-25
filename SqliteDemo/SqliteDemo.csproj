@@ -231,8 +231,8 @@
     <Content Include="Views\Event\AddEvent.cshtml" />
     <Content Include="Views\Event\DeleteEvent.cshtml" />
     <Content Include="Views\Event\UpdateEvent.cshtml" />
-    <Content Include="Views\Event\ListEvent.cshtml" />
     <Content Include="Views\User\ListUser.cshtml" />
+    <Content Include="Views\Event\ListEvents.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
