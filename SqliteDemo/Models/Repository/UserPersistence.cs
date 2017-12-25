@@ -123,7 +123,7 @@ namespace SqliteDemo.Models.Repository
         //It is get the user from id information.
         public static User getUserDB(User keyUser)
         {
-            string sqlQuery = "select * from user where id=" + keyUser.id;
+            string sqlQuery = "select * from user where name='" + keyUser.name+"'";
             List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
         
             if (rows.Count == 0)

@@ -75,6 +75,7 @@ namespace SqliteDemo.Models.Transaction
         {
             session["Status"] = false;
             session["IsAdmin"] = false;
+
             User user = UserPersistence.getUserDB(cr);
             if (user == null)
             {

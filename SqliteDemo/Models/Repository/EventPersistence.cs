@@ -16,7 +16,12 @@ namespace SqliteDemo.Models.Repository
             events = new List<Events>();
 
         }
-
+        public static decimal Countt()
+        {
+            string sqlQuery = "select * from events";
+            List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
+            return (decimal)rows.Count;
+        }
         public static Events GetEvent(int eventId)
         {
             foreach (Events Event in events)
@@ -54,6 +59,8 @@ namespace SqliteDemo.Models.Repository
 
         public static bool AddEvent(Events Event)
         {
+
+            Event.eventId = Countt();
             string sql = "INSERT INTO events(eventId, userId, EventName) VALUES ("
            + Event.eventId + ", "
            + Event.userId + ", '"
@@ -67,6 +74,21 @@ namespace SqliteDemo.Models.Repository
          * the key field.
          * Return false if the book is not found, based on key field match.
          */
+
+       /* public static bool CheckEventname(User keyEvent)
+        {
+            string sqlQuery = "select * from events where name='" + keyEvent. + "'";
+            List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
+
+            if (rows.Count != 0)
+            {
+                return false;
+
+            }
+            else
+                return true;
+        }*/
+
         public static bool UpdateEventName(Events changeName)
         {
             /*

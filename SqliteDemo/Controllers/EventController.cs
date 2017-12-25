@@ -19,11 +19,7 @@ namespace SqliteDemo.Controllers
         /*
 		 * Handle a GET request for the Add Book form.
          */
-        [HttpGet]
-        public ActionResult AddEvent()
-        {
-            return View(new Events());
-        }
+      
         [HttpGet]
         public ActionResult DeleteEvent()
         {
@@ -48,14 +44,19 @@ namespace SqliteDemo.Controllers
             Events[] events = EventManager.GetAllEvents();
             return View("ListEvents", events);
         }
-        /*
-         * Handle the POST request from the Add Book form. The form parameters
-         * are encapsulated in a Book object.
-         */
+        
+
+
+        [HttpGet]
+        public ActionResult AddEvent()
+        {
+            return View(new Events());
+        }
+
         [HttpPost]
         public ActionResult AddEvent(Events newEvent)
         {
-            // Validate book data from the transaction
+            
             if (newEvent.EventName == null)
             {
                 ViewBag.message = "Error: Invalid Request - please try again with choosing a name";
@@ -76,8 +77,8 @@ namespace SqliteDemo.Controllers
                 ViewBag.message = "Error: An User Id is required";
                 return View(newEvent);
             }
-
-            // Add the book
+            
+            
             bool result = EventManager.AddNewEvent(newEvent);
             if (result)
             {
@@ -89,7 +90,7 @@ namespace SqliteDemo.Controllers
             }
 
             Events[] events = EventManager.GetAllEvents();
-            return View("ListEvents", events);
+            return View(newEvent);
         }
 
 
