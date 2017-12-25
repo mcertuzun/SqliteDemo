@@ -29,9 +29,7 @@ namespace SqliteDemo.Controllers
         [HttpGet]
         public ActionResult DeleteEvent()
         {
-
-            Events event1 = new Events();
-            return View(event1);
+            return View(new Events());
         }
 
         [HttpPost]
@@ -76,12 +74,12 @@ namespace SqliteDemo.Controllers
                 ViewBag.message = "Error: Invalid Request - please try again";
                 return View(new Events());
             }
-            if (newEvent.eventId.ToString().Length == 0)
+            if (newEvent.EventId.ToString().Length == 0)
             {
                 ViewBag.message = "Error: An Id is required";
                 return View(newEvent);
             }
-            if (newEvent.userId.ToString().Length == 0)
+            if (newEvent.UserId.ToString().Length == 0)
             {
                 ViewBag.message = "Error: An User Id is required";
                 return View(newEvent);
@@ -124,7 +122,7 @@ namespace SqliteDemo.Controllers
                 return View(new Events());
             }
 
-            if (newEvent.eventId.ToString().Length == 0)
+            if (newEvent.EventId.ToString().Length == 0)
             {
                 ViewBag.message = "Error: An Id is required";
                 return View(newEvent);

@@ -27,7 +27,7 @@ namespace SqliteDemo.Models.Repository
         {
             foreach (Events Event in events)
             {
-                if (eventId == Event.eventId)
+                if (eventId == Event.EventId)
                 {
                     return Event;
                 }
@@ -47,8 +47,8 @@ namespace SqliteDemo.Models.Repository
 
                 Events evnt = new Events
                 {
-                    eventId = (decimal)dataRow[0],
-                    userId = (decimal)dataRow[1],
+                    EventId = (decimal)dataRow[0],
+                    UserId = (decimal)dataRow[1],
                     EventName = (string)dataRow[2]
 
                 };
@@ -59,7 +59,7 @@ namespace SqliteDemo.Models.Repository
         }
         public static Events getEvent(Events keyEvent)
         {
-            string sqlQuery = "select * from events where eventId=" + keyEvent.eventId;
+            string sqlQuery = "select * from events where eventId=" + keyEvent.EventId;
             List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
             //System.Console.WriteLine("$$rows: " + rows.Count);
             if (rows.Count == 0)
@@ -72,8 +72,8 @@ namespace SqliteDemo.Models.Repository
 
             Events Event = new Events
             {
-                eventId = (decimal)dataRow[0],
-                userId = (decimal)dataRow[1],
+                EventId = (decimal)dataRow[0],
+                UserId = (decimal)dataRow[1],
                 EventName = (string)dataRow[2]
             };
             return Event;
@@ -81,10 +81,10 @@ namespace SqliteDemo.Models.Repository
         public static bool AddEvent(Events Event)
         {
 
-            Event.eventId = Countt();
+            Event.EventId = Countt();
             string sql = "INSERT INTO events(eventId, userId, EventName) VALUES ("
-           + Event.eventId + ", "
-           + Event.userId + ", '"
+           + Event.EventId + ", "
+           + Event.UserId + ", '"
            + Event.EventName + "' );";
             RepositoryManager.Repository.DoCommand(sql);
             return true;
@@ -118,7 +118,7 @@ namespace SqliteDemo.Models.Repository
             * book's title with using it's ISBN number
             */
             string sql = "Update events Set EventName='"
-                + changeName.EventName + "' Where eventId=" + changeName.eventId + ";";
+                + changeName.EventName + "' Where eventId=" + changeName.EventId + ";";
             RepositoryManager.Repository.DoCommand(sql);
             return true;
         }
@@ -131,7 +131,7 @@ namespace SqliteDemo.Models.Repository
 
         public static bool DeleteEvent(Events delEvent)
         {
-            string sql = "delete from events where eventId=" + delEvent.eventId;
+            string sql = "delete from events where eventId=" + delEvent.EventId;
             if (RepositoryManager.Repository.DoCommand(sql) == 1)
             {
                 return true;

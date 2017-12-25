@@ -7,8 +7,8 @@ namespace SqliteDemo.Models.Entity
 {
     public class Events
     {
-        public decimal eventId { get; set; }
-        public decimal userId { get; set; }
+        public decimal EventId { get; set; }
+        public decimal UserId { get; set; }
         public string EventName { get; set; }
 
         public Events()
@@ -16,11 +16,11 @@ namespace SqliteDemo.Models.Entity
 
         }
 
-        public Events(int eventId1, int userId1, string EventName1)
+        public Events(int EventId1, int UserId1, string EventName1)
         {
-            eventId = eventId1;
+            EventId = EventId1;
             EventName = EventName1;
-            userId = userId1;
+            UserId = UserId1;
         }
     }
 }
