@@ -93,7 +93,7 @@ namespace SqliteDemo.Controllers
             }
 
             User[] users = UserManager.GetAllUsers();
-            return View("List", users);
+            return View(UserEfe);
         }
 
 
