@@ -40,7 +40,7 @@ namespace SqliteDemo.Controllers
         {
 
 
-            if (UserEfe.name == null)
+            if (UserEfe.Name == null)
             {
                 ViewBag.message = "Error: A name is required";
                 return View(UserEfe);
@@ -70,12 +70,12 @@ namespace SqliteDemo.Controllers
                 ViewBag.message = "Error: Invalid Request - please try again";
                 return View(new User());
             }
-            if (UserEfe.name == null || UserEfe.name.Length == 0)
+            if (UserEfe.Name == null || UserEfe.Name.Length == 0)
             {
                 ViewBag.message = "Error: A name is required";
                 return View(UserEfe);
             }
-            if (UserEfe.id == 0)
+            if (UserEfe.Id == 0)
             {
                 ViewBag.message = "Error: An user id is required";
                 return View(UserEfe);
@@ -118,7 +118,7 @@ namespace SqliteDemo.Controllers
                 return View(new User());
             }
 
-            if (newUser.id == 0)
+            if (newUser.Id == 0)
             {
                 ViewBag.message = "Error: An id is required";
                 return View(newUser);
