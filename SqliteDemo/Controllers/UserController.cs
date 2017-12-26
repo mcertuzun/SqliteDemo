@@ -31,8 +31,8 @@ namespace SqliteDemo.Controllers
         public ActionResult DeleteUser()
         {
 
-            User userEfe = new User();
-            return View(userEfe);
+            User UserEfe = new User();
+            return View(UserEfe);
         }
 
         [HttpPost]

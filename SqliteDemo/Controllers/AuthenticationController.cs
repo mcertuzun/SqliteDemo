@@ -64,38 +64,32 @@ namespace SqliteDemo.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Login(User us)
+        
+        public ActionResult Login(Credential credential)
         {
-            if (us == null)
+            if (credential == null)
             {
-                return View(new User());
+                return View(new Credential());
+
             }
-            if (( (us.Password == null) || (us.Password.Length == 0)))
+            if (credential.UserId.ToString().Length == 0 || credential.Password == null || credential.Password.Length == 0)
             {
-                TempData["message"] = "UserId and Password needed";
-                return View(us);
-                
+                TempData["loginMessage"] = "Re-enter User Id and Password without blank fields.";
+                return View(credential);
+            }
+            bool accaptable = UserManager.AuthenticateUser(credential, Session);
+            if (accaptable)
+            {
+                TempData["loginMessage"] = "Login Successfully";
+                Session["userId"] = credential.UserId;
+                return RedirectToAction("Index", "Home");
             }
             else
             {
-                //BURADA KALDIM 25122017
-               bool control = UserManager.AuthenticateUser(us, Session);
-
-                 if (control)
-                 {
-                     TempData["message"] = "Login Successful";
-                     return RedirectToAction("Index", "Home");
-                 }
-                 else
-                 {
-                     TempData["message"] = " Invalid Login credentials";
-                     return View(us);
-                 }
-
-
+                TempData["loginMessage"] = "Invalid login attempt";
+                return View(credential);
             }
-
-
+            //return View(credential);
         }
         public ActionResult Logout()
         {

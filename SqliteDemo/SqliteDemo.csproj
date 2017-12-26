@@ -166,6 +166,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Entity\comment.cs" />
+    <Compile Include="Models\Entity\Credential.cs" />
     <Compile Include="Models\Entity\Events.cs" />
     <Compile Include="Models\Entity\User.cs" />
     <Compile Include="Models\Repository\EventPersistence.cs" />
