@@ -52,7 +52,7 @@ namespace SqliteDemo.Models.Transaction
             {
                 return false;
             }
-            return EventPersistence.UpdateEventName(changeEvent);
+            return EventPersistence.UpdateEvent(changeEvent);
         }
 
         public static Events[] GetAllEvents()

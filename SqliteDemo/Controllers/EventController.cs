@@ -115,7 +115,6 @@ namespace SqliteDemo.Controllers
         [HttpPost]
         public ActionResult UpdateEvent(Events newEvent)
         {
-
             if (newEvent == null)
             {
                 ViewBag.message = "Error: Invalid Request - please try again";

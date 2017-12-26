@@ -111,14 +111,14 @@ namespace SqliteDemo.Models.Repository
                 return true;
         }
 
-        public static bool UpdateEventName(Events changeName)
+        public static bool UpdateEvent(Events change)
         {
             /*
             * This method use a SQL format (update) to update the 
             * book's title with using it's ISBN number
             */
             string sql = "Update events Set EventName='"
-                + changeName.EventName + "' Where eventId=" + changeName.EventId + ";";
+                + change.EventName +"userId="+ change.UserId+"' Where eventId=" + change.EventId + ";";
             RepositoryManager.Repository.DoCommand(sql);
             return true;
         }
