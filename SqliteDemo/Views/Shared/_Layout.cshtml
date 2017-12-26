@@ -42,7 +42,7 @@
                 <li>@Html.ActionLink("Login", "Login", "Authentication")</li>
                 <li>@Html.ActionLink("Register", "Register", "Authentication")</li>
         }
-        else if ((bool)Session["LoggedIn"] == true)
+        else if ((bool)Session["LoggedIn"] == true && (bool)Session["IsAdmin"] == false)
         {
             <p>Welcome</p>
             

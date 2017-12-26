@@ -26,8 +26,8 @@ namespace SqliteDemo.Models.Repository
                 EmailAddress = "admin@gmail.com",
                 Salt = salt,
                 HashPassword = EncryptionManager.EncodePassword("abc123", salt),
-                IsAdmin = 1,
-                Status = 1
+                IsAdmin = true,
+                Status = true
 
             };
             AddUser(Users);
@@ -78,8 +78,8 @@ namespace SqliteDemo.Models.Repository
                     EmailAddress = (string)dataRow[2],
                     Salt = (string)dataRow[3],
                     HashPassword = (string)dataRow[4],
-                    IsAdmin = (decimal)dataRow[5],
-                    Status = (decimal)dataRow[6]
+                    IsAdmin = (bool)dataRow[5],
+                    Status = (bool)dataRow[6]
    
                 };
 
@@ -140,23 +140,30 @@ namespace SqliteDemo.Models.Repository
         {
             string sqlQuery = "select * from user where name='" + KeyUser.Name+"'";
             List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
-        
+            // It is choosing first user.
+            object[] dataRow = rows[0];
             if (rows.Count == 0)
             { 
                 return null;
             }
-
-        // It is choosing first user.
-            object[] dataRow = rows[0];
-          
+            bool admin = false, status= false;
+            if ((decimal)dataRow[5] == 1)
+            {
+                admin = true;
+            }
+            if ((decimal)dataRow[6] == 1)
+            {
+                status = true;
+            }
+      
             User user = new User {
                 Id = (decimal)dataRow[0],
                 Name = (string)dataRow[1],
                 EmailAddress = (string)dataRow[2],
                 Salt = (string)dataRow[3],
                 HashPassword = (string)dataRow[4],
-                IsAdmin = (decimal)dataRow[5],
-                Status = (decimal)dataRow[6]
+                IsAdmin = admin,
+                Status = status
             };
             return user;
         }

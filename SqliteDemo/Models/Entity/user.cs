@@ -11,8 +11,8 @@ namespace SqliteDemo.Models.Entity
         public string Name { get; set; }
         public string EmailAddress { get; set; }
         public string HashPassword { get; set; }
-        public decimal IsAdmin { get; set; }
-        public decimal Status { get; set; }
+        public bool IsAdmin { get; set; }
+        public bool Status { get; set; }
         public string Salt { get; set; }
         public string Password { get; set; }
 
@@ -21,7 +21,7 @@ namespace SqliteDemo.Models.Entity
 
         }
 
-        public User(decimal Id, string Name, string EmailAddress1, string Salt1, string Password,  decimal IsAdmin1, decimal Status1)
+        public User(decimal Id, string Name, string EmailAddress1, string Salt1, string Password,  bool IsAdmin1, bool Status1)
         {
             this.Id = Id;
             this.Name = Name;
