@@ -61,7 +61,7 @@ namespace SqliteDemo.Controllers
         [HttpGet]
         public ActionResult Login()
         {
-            return View();
+            return View(new Credential());
         }
         [HttpPost]
         
@@ -74,19 +74,19 @@ namespace SqliteDemo.Controllers
             }
             if (credential.UserId.ToString().Length == 0 || credential.Password == null || credential.Password.Length == 0)
             {
-                TempData["loginMessage"] = "Re-enter User Id and Password without blank fields.";
+                TempData["message"] = "Re-enter User Id and Password without blank fields.";
                 return View(credential);
             }
             bool accaptable = UserManager.AuthenticateUser(credential, Session);
             if (accaptable)
             {
-                TempData["loginMessage"] = "Login Successfully";
+                TempData["message"] = "Login Successfully";
                 Session["userId"] = credential.UserId;
                 return RedirectToAction("Index", "Home");
             }
             else
             {
-                TempData["loginMessage"] = "Invalid login attempt";
+                TempData["message"] = "Invalid login attempt";
                 return View(credential);
             }
             //return View(credential);

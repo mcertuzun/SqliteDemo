@@ -18,6 +18,7 @@ namespace SqliteDemo.Models.Repository
         static RepositoryManager() {
             Repository = new SqliteRepository();
             Repository.Open();
+            Repository.Initialize();
         }
     }
 }
