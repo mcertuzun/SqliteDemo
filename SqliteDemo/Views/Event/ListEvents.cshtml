@@ -4,11 +4,27 @@
 @using SqliteDemo.Models.Entity;
 @model Events[]
 <h4>Event List</h4>
-<ul>
+
+
+     <table style="width:100%">
+    <tr>
+        <th>Event ID</th>
+        <th>User ID</th>
+        <th>Event Name</th>
+    </tr>
+         
     @foreach (Events events in Model)
-    {
-        <li>@events.EventId  </li>
-        <li>@events.UserId</li>
-        <li>@events.EventName</li>
+    {   
+     <tr>
+        
+           <td>@events.EventId</td>
+           <td>@events.UserId</td>
+           <td>@events.EventName</td>
+       
+     </tr>
     }
-</ul>
+      </table>
+
+
+
+   

@@ -2,13 +2,24 @@
     ViewBag.Title = "UpdateEvent";
 }
 @using SqliteDemo.Models.Entity;
-@model Events
+@model Events[]
 
 <h2>UpdateEvent</h2>
-<form method="post" action="~/Event/UpdateEvent">
 
-    <p><label>Event Id: <input type="text" name="EventId" value="@Model.EventId" /></label></p>
-    <p><label>Event Name: <input type="text" name="EventName" value="@Model.EventName" /></label></p>
-    <p><input type="submit" value="Update Event" /></p>
+<table style="width:100%">
+    <tr>
+        <th>Event ID</th>
+        <th>User ID</th>
+        <th>Event Name</th>
+    </tr>
 
-</form>
+    @foreach (Events events in Model)
+    {
+
+        <tr>
+       <td>@events.EventId  </td>             
+       <td>@events.UserId</td>
+       <td>@events.EventName</td>  
+        </tr>
+    }
+</table>

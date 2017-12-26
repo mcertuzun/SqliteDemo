@@ -1,0 +1,33 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using SqliteDemo.Models.Entity;
+@model User[]
+<h4>User List</h4>
+
+<table style="width:100%">
+    <tr>
+        <th>User ID</th>
+        <th>User Name</th>
+        <th>Email</th>
+        <th>Salt</th>
+        <th>HashPassword</th>
+        <th>Admin</th>
+        <th>Status</th>
+    </tr>
+
+    @foreach (User users in Model)
+    {
+
+        <tr>
+            <td>@users.Id</td>
+            <td>@users.Name</td>
+            <td>@users.EmailAddress</td>
+            <td>@users.Salt</td>
+            <td>@users.HashPassword</td>    
+            <td>@users.IsAdmin</td>
+            <td>@users.Status</td>
+        </tr>
+    }
+</table>
+
