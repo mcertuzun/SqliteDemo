@@ -15,7 +15,12 @@ namespace SqliteDemo.Controllers
          */
         public ActionResult Index()
         {
-            return View();
+            bool result = RepositoryManager.Repository.Initialize();
+            ViewBag.message = result ?
+                "Repository Initialized" : "Repository Initialization Failed";
+            return View("Index");
+
+           
         }
         
         /*
