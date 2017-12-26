@@ -77,10 +77,10 @@ namespace SqliteDemo.Models.Transaction
             session["Status"] = false;
             session["IsAdmin"] = false;
 
-            //User user1 = new User();
-            //user1.Id = credential.UserId;
-            User user = UserPersistence.GetUser(credential.UserId);
-            System.Diagnostics.Debug.WriteLine("returned: " + user.Id);
+            User user1 = new User();
+            user1.Name = credential.UserName;
+            User user = UserPersistence.getUserDB(user1);
+          //  System.Diagnostics.Debug.WriteLine("returned: " + user.Id);
             if (user == null)
             {
                 return false;

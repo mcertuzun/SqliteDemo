@@ -14,7 +14,23 @@ namespace SqliteDemo.Models.Repository
         static UserPersistence()
         {
             users = new List<User>();
+           
+        }
+        public static void addAdmin()
+        {
+            string salt = EncryptionManager.PasswordSalt;
+           User Users= new User
+            {
+                Id = 0,
+                Name = "admin",
+                EmailAddress = "admin@gmail.com",
+                Salt = salt,
+                HashPassword = EncryptionManager.EncodePassword("abc123", salt),
+                IsAdmin = 1,
+                Status = 1
 
+            };
+            AddUser(Users);
         }
         public static bool CheckUsername(User KeyUser)
         {
@@ -75,8 +91,7 @@ namespace SqliteDemo.Models.Repository
         
         public static bool AddUser(User user)
         {
-            decimal num = UserPersistence.Countt();
-           
+
                 user.Id = Countt();
                 string sql = "INSERT INTO [user]([id],[name] ,[EmailAddress] ,[salt] ,[HashedPassword],[IsAdmin],[Status])VALUES("
                 + user.Id + ", '"
@@ -145,8 +160,9 @@ namespace SqliteDemo.Models.Repository
             };
             return user;
         }
-      
-       
+        
+
+
         public static bool DeleteUser(User DelUser)
         {
             string sql = "delete from user where id=" + DelUser.Id;

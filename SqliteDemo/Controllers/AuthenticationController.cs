@@ -72,7 +72,7 @@ namespace SqliteDemo.Controllers
                 return View(new Credential());
 
             }
-            if (credential.UserId.ToString().Length == 0 || credential.Password == null || credential.Password.Length == 0)
+            if (credential.UserName.Length == 0 || credential.Password == null || credential.Password.Length == 0)
             {
                 TempData["message"] = "Re-enter User Id and Password without blank fields.";
                 return View(credential);
@@ -81,7 +81,7 @@ namespace SqliteDemo.Controllers
             if (accaptable)
             {
                 TempData["message"] = "Login Successfully";
-                Session["userId"] = credential.UserId;
+                Session["userId"] = credential.UserName;
                 return RedirectToAction("Index", "Home");
             }
             else

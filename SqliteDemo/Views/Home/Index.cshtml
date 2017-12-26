@@ -1,6 +1,8 @@
-﻿@{
+﻿@using SqliteDemo.Models.Repository;
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Home Page";
+    bool result = RepositoryManager.Repository.Initialize();
 }
 
 <div class="jumbotron">

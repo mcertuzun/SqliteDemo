@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.IO;
-
+using SqliteDemo.Models.Repository;
 namespace SqliteTest.Models.Repository
 {
     /*
@@ -11,7 +11,7 @@ namespace SqliteTest.Models.Repository
     public class SqliteRepository : IRepository
     {
         // Location of the database file 
-        private string databaseFile = "C:\\Users\\EFE\\MyDatabase.sqlite";
+        private string databaseFile = "C:\\Users\\mcan.ertuzun\\MyDatabase.sqlite";
 
         private SQLiteConnection dbConnection;
 
@@ -127,15 +127,7 @@ namespace SqliteTest.Models.Repository
                 string comment = "CREATE TABLE comment (CommentId Integer, EventId Integer ,Text VARCHAR(500), PRIMARY KEY(CommentId),FOREIGN KEY(EventId) REFERENCES events(eventId))";
                 DoCommand(comment);
 
-              string sqlAdmin = "INSERT INTO user(id, name, EmailAddress, salt, HashedPassword, IsAdmin, Status )VALUES("
-                 + 0 + ", '"
-                 + "admin" + "', '"
-                 + "admin@ad.com" + "', '"
-                 + "fjkljwurýwjnçzop" + "', '"
-                 + "asdfasdfsdfsdfsadf" + "', "
-                 + 1 + ", "
-                 + 1 + ");";
-                DoCommand(sqlAdmin);
+                UserPersistence.addAdmin();
             }
 
             return success;
