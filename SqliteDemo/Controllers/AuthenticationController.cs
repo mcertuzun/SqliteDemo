@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using SqliteDemo.Models.Entity;
 using SqliteDemo.Models.Transaction;
 using SqliteDemo.Models.Repository;
+using System.Text.RegularExpressions;
+
 namespace SqliteDemo.Controllers
 {
     public class AuthenticationController : Controller
@@ -63,8 +65,11 @@ namespace SqliteDemo.Controllers
         {
             return View(new Credential());
         }
+
+   
+
         [HttpPost]
-        
+        //It checks the content of both the userid and password input field to prevent SQL Injection attacks
         public ActionResult Login(Credential credential)
         {
             if (credential == null)
@@ -72,12 +77,24 @@ namespace SqliteDemo.Controllers
                 return View(new Credential());
 
             }
-            if (credential.UserName.Length == 0 || credential.Password == null || credential.Password.Length == 0)
+            if (credential.Password == null || credential.Password == null || credential.UserName.Length == 0 ||  credential.Password.Length == 0)
             {
                 TempData["message"] = "Re-enter User Id and Password without blank fields.";
+              //  TempData["message"] = "Re-enter User Id and Password without blank fields.";
                 return View(credential);
             }
+            string validUserId = @"^[a-z][a-z0-9]*$";
+            string validPassword = @"^[a-z0-9!@#$*]{5,12}$";
+            Match match = Regex.Match(credential.UserName, validUserId);
+            Match matchPass = Regex.Match(credential.Password, validPassword);
+            if (!match.Success || !matchPass.Success)
+            {
+                TempData["message"] = "incorrect format";
+                return View(credential);
+            }
+          
             bool accaptable = UserManager.AuthenticateUser(credential, Session);
+
             if (accaptable)
             {
                 TempData["message"] = "Login Successfully";
