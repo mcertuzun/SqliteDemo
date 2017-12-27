@@ -21,7 +21,7 @@ namespace SqliteDemo.Models.Entity
 
         }
 
-        public User(decimal Id, string Name, string EmailAddress1, string Salt1, string Password,  decimal IsAdmin1, decimal Status1)
+        public User(decimal Id, string Name, string EmailAddress1, string Salt1, string Password, decimal IsAdmin1, decimal Status1)
         {
             this.Id = Id;
             this.Name = Name;

@@ -91,9 +91,8 @@ namespace SqliteDemo.Models.Repository
         
         public static bool AddUser(User user)
         {
-
                 user.Id = Countt();
-                string sql = "INSERT INTO [user]([id],[name] ,[EmailAddress] ,[salt] ,[HashedPassword],[IsAdmin],[Status])VALUES("
+                string sql = "INSERT INTO user(Id,Name ,EmailAddress ,Salt ,HashedPassword ,IsAdmin ,Status )VALUES("
                 + user.Id + ", '"
                 + user.Name + "', '"
                 + user.EmailAddress + "', '"
@@ -102,8 +101,7 @@ namespace SqliteDemo.Models.Repository
                 + user.IsAdmin + ", "
                 + user.Status + ");";
             RepositoryManager.Repository.DoCommand(sql);
-            return true;
-        
+            return true;        
         }
         /*
          * Update a book that is in the database, replacing all field values except
@@ -140,15 +138,14 @@ namespace SqliteDemo.Models.Repository
         {
             string sqlQuery = "select * from user where name='" + KeyUser.Name+"'";
             List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
-        
+            // It is choosing first user.
+            object[] dataRow = rows[0];
             if (rows.Count == 0)
             { 
                 return null;
             }
-
-        // It is choosing first user.
-            object[] dataRow = rows[0];
-          
+      
+      
             User user = new User {
                 Id = (decimal)dataRow[0],
                 Name = (string)dataRow[1],
