@@ -55,6 +55,10 @@ namespace SqliteDemo.Controllers
                 ViewBag.message = "That user could not be deleted";
             }
             User[] users = UserManager.GetAllUsers();
+            if (users == null)
+            {
+                ViewBag.message = "There is not people for listing";
+            }
             return View("List", users);
         }
         /*

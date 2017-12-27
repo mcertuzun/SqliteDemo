@@ -89,7 +89,16 @@ namespace SqliteDemo.Models.Transaction
             if (hash == user.HashPassword)
             {      
                 session["LoggedIn"] = true;
-                session["Status"] = user.IsAdmin;
+                session["Status"] = true;
+                if (credential.UserName == "admin")
+                {
+                    session["IsAdmin"] = true;
+                }
+                else
+                {
+                    session["IsAdmin"] = false;
+                }
+
                 return true;
             }
             else return false;

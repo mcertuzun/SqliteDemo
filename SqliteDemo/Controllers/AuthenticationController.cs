@@ -99,6 +99,14 @@ namespace SqliteDemo.Controllers
             {
                 TempData["message"] = "Login Successfully";
                 Session["userId"] = credential.UserName;
+                if (credential.UserName == "admin")
+                {
+                    Session["IsAdmin"] = true;
+                }
+                else
+                {
+                    Session["IsAdmin"] = false;
+                }
                 return RedirectToAction("Index", "Home");
             }
             else

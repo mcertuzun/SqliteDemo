@@ -12,17 +12,26 @@
         <th>User ID</th>
         <th>Event Name</th>
     </tr>
-         
-    @foreach (Events events in Model)
-    {   
-     <tr>
-        
-           <td>@events.EventId</td>
-           <td>@events.UserId</td>
-           <td>@events.EventName</td>
-       
-     </tr>
-    }
+         @{if (Model == null)
+             {
+                 ViewBag.message = "There is not event";
+
+             }
+             else
+             {
+                foreach (Events events in Model)
+                {
+                    <tr>
+
+                        <td>@events.EventId</td>
+                        <td>@events.UserId</td>
+                        <td>@events.EventName</td>
+
+                    </tr>
+                }
+             }
+        }    
+   
       </table>
 
 

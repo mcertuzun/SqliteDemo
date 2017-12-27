@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -20,8 +21,10 @@
                 <a href="~/Home/Index" class="navbar-brand" area="">LMS Home Page</a>
 
             </div>
+            
            
     @{
+       
         if (Session["LoggedIn"] == null || (bool)Session["LoggedIn"] == false)
         {
             <div class="navbar-collapse collapse">
@@ -33,7 +36,7 @@
 
             </div> 
         }
-        else if ((bool)Session["LoggedIn"] == true && (bool)Session["IsAdmin"] == false)
+        else if ((Convert.ToBoolean(Session["LoggedIn"] = true)) && (Convert.ToBoolean(Session["IsAdmin"] = false)))
         {
             <p>Welcome</p>
             <div class="navbar-collapse collapse">
@@ -47,12 +50,13 @@
                 </ul>
 
             </div>
-
+           
+            <h2 style="background-color:ivory">User page</h2>
         }
-        else if (((bool)Session["LoggedIn"] == true) && (bool)Session["IsAdmin"] == true)
+        else if ((Convert.ToBoolean(Session["LoggedIN"] = true)) && (Convert.ToBoolean(Session["IsAdmin"] = true)))
         {
             <div class="navbar-collapse collapse">
-                <p>Admin page</p>
+                
                 <ul class="nav navbar-nav">
                    
                     <li>@Html.ActionLink("Index", "Index", "Home")</li>
@@ -65,14 +69,17 @@
                 </ul>
 
             </div>
-          
+
+          <h2 style="color:ivory">Admin page</h2>
+            
         }
+
     }
-           
+
         </div>
     </div>
-
-   
+    <p style="background:lightblue; padding:.5ex">@Session["UserId"]</p>
+   @Session["IsAdmin"]
 
     <p style="background:lightblue; padding:.5ex">@ViewBag.message</p>
     <hr />
@@ -89,6 +96,6 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+     c
 </body>
 </html>
