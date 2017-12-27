@@ -86,10 +86,12 @@ namespace SqliteDemo.Models.Transaction
                 return false;
             }
             var hash = EncryptionManager.EncodePassword(credential.Password, user.Salt);
+
             if (hash == user.HashPassword)
             {      
                 session["LoggedIn"] = true;
                 session["Status"] = true;
+
                 if (credential.UserName == "admin")
                 {
                     session["IsAdmin"] = true;
