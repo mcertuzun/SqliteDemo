@@ -26,8 +26,8 @@ namespace SqliteDemo.Models.Repository
                 EmailAddress = "admin@gmail.com",
                 Salt = salt,
                 HashPassword = EncryptionManager.EncodePassword("abc123", salt),
-                IsAdmin = true,
-                Status = true
+                IsAdmin = 1,
+                Status = 1
 
             };
             AddUser(Users);
@@ -78,8 +78,8 @@ namespace SqliteDemo.Models.Repository
                     EmailAddress = (string)dataRow[2],
                     Salt = (string)dataRow[3],
                     HashPassword = (string)dataRow[4],
-                    IsAdmin = (bool)dataRow[5],
-                    Status = (bool)dataRow[6]
+                    IsAdmin = (decimal)dataRow[5],
+                    Status = (decimal)dataRow[6]
    
                 };
 
@@ -91,9 +91,8 @@ namespace SqliteDemo.Models.Repository
         
         public static bool AddUser(User user)
         {
-
                 user.Id = Countt();
-                string sql = "INSERT INTO [user]([id],[name] ,[EmailAddress] ,[salt] ,[HashedPassword],[IsAdmin],[Status])VALUES("
+                string sql = "INSERT INTO user(Id,Name ,EmailAddress ,Salt ,HashedPassword ,IsAdmin ,Status )VALUES("
                 + user.Id + ", '"
                 + user.Name + "', '"
                 + user.EmailAddress + "', '"
@@ -102,8 +101,7 @@ namespace SqliteDemo.Models.Repository
                 + user.IsAdmin + ", "
                 + user.Status + ");";
             RepositoryManager.Repository.DoCommand(sql);
-            return true;
-        
+            return true;        
         }
         /*
          * Update a book that is in the database, replacing all field values except
@@ -146,15 +144,7 @@ namespace SqliteDemo.Models.Repository
             { 
                 return null;
             }
-            bool admin = false, status= false;
-            if ((decimal)dataRow[5] == 1)
-            {
-                admin = true;
-            }
-            if ((decimal)dataRow[6] == 1)
-            {
-                status = true;
-            }
+      
       
             User user = new User {
                 Id = (decimal)dataRow[0],
@@ -162,8 +152,8 @@ namespace SqliteDemo.Models.Repository
                 EmailAddress = (string)dataRow[2],
                 Salt = (string)dataRow[3],
                 HashPassword = (string)dataRow[4],
-                IsAdmin = admin,
-                Status = status
+                IsAdmin = (decimal)dataRow[5],
+                Status = (decimal)dataRow[6]
             };
             return user;
         }

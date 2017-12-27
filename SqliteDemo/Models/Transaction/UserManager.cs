@@ -22,8 +22,8 @@ namespace SqliteDemo.Models.Transaction
                 string salt = EncryptionManager.PasswordSalt;
                 newUser.HashPassword = EncryptionManager.EncodePassword(newUser.Password, salt);
                 newUser.Salt = salt;
-                newUser.Status = false;
-                newUser.IsAdmin = false;
+                newUser.Status = 0;
+                newUser.IsAdmin = 0;
                 return UserPersistence.AddUser(newUser);
             }
                 return false;

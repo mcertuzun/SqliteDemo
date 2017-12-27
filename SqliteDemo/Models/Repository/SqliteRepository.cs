@@ -126,10 +126,11 @@ namespace SqliteTest.Models.Repository
 
                 string comment = "CREATE TABLE comment (CommentId Integer, EventId Integer ,Text VARCHAR(500), PRIMARY KEY(CommentId),FOREIGN KEY(EventId) REFERENCES events(eventId))";
                 DoCommand(comment);
-
                 UserPersistence.addAdmin();
-            }
 
+            }
+            
+           
             return success;
         }
     }
