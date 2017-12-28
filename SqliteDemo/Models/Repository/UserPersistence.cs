@@ -140,11 +140,12 @@ namespace SqliteDemo.Models.Repository
             string sqlQuery = "select * from user where name='" + KeyUser.Name+"'";
             List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
             // It is choosing first user.
-            object[] dataRow = rows[0];
             if (rows.Count == 0)
-            { 
+            {
                 return null;
             }
+            object[] dataRow = rows[0];
+            
       
       
             User user = new User {
@@ -169,6 +170,31 @@ namespace SqliteDemo.Models.Repository
             {
                 return null;
             }
+
+
+            User user = new User
+            {
+                Id = (decimal)dataRow[0],
+                Name = (string)dataRow[1],
+                EmailAddress = (string)dataRow[2],
+                Salt = (string)dataRow[3],
+                HashPassword = (string)dataRow[4],
+                IsAdmin = (decimal)dataRow[5],
+                Status = (decimal)dataRow[6]
+            };
+            return user;
+        }
+        public static User getUserName(string name)
+        {
+            string sqlQuery = "select * from user where name='" + name + "'";
+            List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
+            // It is choosing first user.
+            if (rows.Count == 0)
+            {
+                return null;
+            }
+            object[] dataRow = rows[0];
+           
 
 
             User user = new User

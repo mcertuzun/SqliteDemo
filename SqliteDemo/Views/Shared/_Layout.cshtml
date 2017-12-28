@@ -12,7 +12,8 @@
 
     <style type="text/css">
         #white {
-            color:ghostwhite
+            color:ghostwhite;
+  
         }
         .top-right {
             position: absolute;
@@ -38,7 +39,7 @@
             
            
     @{
-       
+
         if (Session["LoggedIn"] == null || (bool)Session["LoggedIn"] == false)
         {
             <div class="navbar-collapse collapse">
@@ -50,8 +51,9 @@
 
             </div> 
         }
-        else if ((Convert.ToBoolean(Session["LoggedIn"] ) == true) && (Convert.ToBoolean(Session["IsAdmin"]) == false))
-        {
+       
+        else if ((Convert.ToBoolean(Session["LoggedIn"]) == true) && (Convert.ToBoolean(Session["IsAdmin"]) == false))
+                    {
             <p>Welcome</p>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -60,21 +62,13 @@
                     <li><a href="~/Event/AddEvent">Add an Event</a></li>
                     <li><a href="~/Event/DeleteEvent">Delete an Event</a></li>
                     <li><a href="~/Event/UpdateEvent">Change an Event</a></li>
+                    <li><a href="~/User/ChangeUserName" value="@Session["UserId"]">Edit Profile</a></li>
+                    <li><a href="#" id="white">You logged as @Session["UserId"]  </a></li>
                     <li><a href="~/Authentication/logout">Logout</a></li>
-                    <li class="btn-group">
-                        <button type="button" class="btn btn-default dropdown-toggle " style="top:7px" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            @Session["UserId"] Panel<span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a href="User/ChangeUser">Edit Profile</a></li>
-                       
-                        </ul>
-                    </li>
                 </ul>
-       
             </div>
-            <p id="white">User page</p>
-            
+
+          
         }
         else if ((Convert.ToBoolean(Session["LoggedIn"]) == true) && (Convert.ToBoolean(Session["IsAdmin"]) == true))
         {
@@ -88,20 +82,22 @@
                     <li><a href="~/Event/DeleteEvent">Delete an Event</a></li>
                     <li><a href="~/Event/UpdateEvent">Change an Event</a></li>
                     <li><a href="~/User/List">User List</a></li>
+                    <li><a href="#" id="white">You logged as @Session["UserId"]  </a></li>
                     <li><a href="~/Authentication/logout">Logout</a></li>
-                   
+
+
                 </ul>
                 <p id="white" class="top-right">You logged as @Session["UserId"]  </p>
             </div>
 
-          <p id="white">Admin page</p>
         }
 }
         </div>
 </div>
+
 <p style="background:lightblue; padding:.5ex">@ViewBag.message </p>
     <hr />
-    <p></p>
+   
     
    
     <div class="container body-content">
