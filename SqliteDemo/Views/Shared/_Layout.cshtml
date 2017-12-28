@@ -4,10 +4,24 @@
 <html>
 <head>
     <meta charset="utf-8" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
+    <style type="text/css">
+        #white {
+            color:ghostwhite
+        }
+        .top-right {
+            position: absolute;
+            top: 70%;
+            right: 10%;
+        }
+
+    </style>
+
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -47,11 +61,21 @@
                     <li><a href="~/Event/DeleteEvent">Delete an Event</a></li>
                     <li><a href="~/Event/UpdateEvent">Change an Event</a></li>
                     <li><a href="~/Authentication/logout">Logout</a></li>
+                    <li class="btn-group">
+                        <button type="button" class="btn btn-default dropdown-toggle " style="top:7px" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            @Session["UserId"] Panel<span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Profile</a></li>
+                            <li><a href="#">Another action</a></li>
+                           
+                        </ul>
+                    </li>
                 </ul>
-
+       
             </div>
-           
-            <h2 style="background-color:ivory">User page</h2>
+            <p id="white">User page</p>
+            
         }
         else if ((Convert.ToBoolean(Session["LoggedIn"]) == true) && (Convert.ToBoolean(Session["IsAdmin"]) == true))
         {
@@ -66,22 +90,17 @@
                     <li><a href="~/Event/UpdateEvent">Change an Event</a></li>
                     <li><a href="~/User/List">User List</a></li>
                     <li><a href="~/Authentication/logout">Logout</a></li>
+                   
                 </ul>
-
+                <p id="white" class="top-right">You logged as @Session["UserId"]  </p>
             </div>
 
-          <h2 style="color:ivory">Admin page</h2>
-            
+          <p id="white">Admin page</p>
         }
-
-    }
-
+}
         </div>
-    </div>
-    <p style="background:lightblue; padding:.5ex">@Session["UserId"]</p>
-   @Session["IsAdmin"]
-
-    <p style="background:lightblue; padding:.5ex">@ViewBag.message</p>
+</div>
+<p style="background:lightblue; padding:.5ex">@ViewBag.message </p>
     <hr />
     <p></p>
     

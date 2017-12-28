@@ -39,11 +39,32 @@ namespace SqliteDemo.Controllers
                 ViewBag.message = "Error: A name is required";
                 return View(us);
             }
+            string validUserId = @"^[a-z][a-z0-9]*$";
+            string validPassword = @"^[a-z0-9!@#$*]{5,12}$";
+            string validEmail = @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$";
+            Match matchMail = Regex.Match(us.EmailAddress, validEmail);
+            Match match = Regex.Match(us.Name, validUserId);
+            Match matchPass = Regex.Match(us.Password, validPassword);
+            if (!match.Success)
+            {
+                TempData["Username"] = "Username is not in the correct format";
+                return View(us);
+            }
+            if (!matchPass.Success)
+            {
+                TempData["Password"] = "Password is not in the correct format";
+                return View(us);
+            }
+            if (!matchMail.Success)
+            {
+                TempData["Email"] = "Email is not in the correct format";
+                return View(us);
+            }
 
             //User value=new User();
 
             // Add the user
-           
+
             bool result = UserManager.AddNewUser(us);
             if (result)
             {
@@ -80,19 +101,28 @@ namespace SqliteDemo.Controllers
             if (credential.Password == null || credential.Password == null || credential.UserName.Length == 0 ||  credential.Password.Length == 0)
             {
                 TempData["message"] = "Re-enter User Id and Password without blank fields.";
-              //  TempData["message"] = "Re-enter User Id and Password without blank fields.";
+             
                 return View(credential);
             }
+            
             string validUserId = @"^[a-z][a-z0-9]*$";
             string validPassword = @"^[a-z0-9!@#$*]{5,12}$";
+            
             Match match = Regex.Match(credential.UserName, validUserId);
             Match matchPass = Regex.Match(credential.Password, validPassword);
-            if (!match.Success || !matchPass.Success)
+            
+            if (!match.Success)
             {
-                TempData["message"] = "incorrect format";
+                TempData["Username"] = "Username is not in the correct format";
                 return View(credential);
             }
-          
+            if (!matchPass.Success)
+            {
+                TempData["Password"] = "Password is not in the correct format";
+                return View(credential);
+            }
+         
+
             bool accaptable = UserManager.AuthenticateUser(credential, Session);
 
             if (accaptable)
