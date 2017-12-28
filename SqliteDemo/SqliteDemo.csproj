@@ -235,6 +235,7 @@
     <Content Include="Views\User\List.cshtml" />
     <Content Include="Views\Event\ListEvents.cshtml" />
     <Content Include="Views\User\ChangeUser.cshtml" />
+    <Content Include="Views\User\UserName.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

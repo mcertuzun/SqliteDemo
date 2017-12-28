@@ -117,15 +117,12 @@ namespace SqliteDemo.Controllers
             return View("ChangeUser", user);
         }
         
-
-
-
         [HttpPost]
         public ActionResult ChangeUser(User newUser)
         {
            string newEmail = newUser.EmailAddress;
            string newName = newUser.Name;
-            
+           decimal newStatus = newUser.Status; 
 
             newUser =(User) Session["user"];
             if (newUser == null)
@@ -144,10 +141,10 @@ namespace SqliteDemo.Controllers
                 Salt = salt,
                 HashPassword = EncryptionManager.EncodePassword("abc123", salt),
                 IsAdmin = 0,
-                Status = 0
+                Status = newStatus
 
             };
-                bool result = UserPersistence.UpdateUser(Users);
+                bool result = UserPersistence.UpdateUserName(Users);
                 if (result)
                 {
                     ViewBag.message = "User Updated";
@@ -168,10 +165,10 @@ namespace SqliteDemo.Controllers
                     Salt = salt,
                     HashPassword = EncryptionManager.EncodePassword("abc123", salt),
                     IsAdmin = 0,
-                    Status = 0
+                    Status = newStatus
 
                 };
-                bool result = UserPersistence.UpdateUser(Users);
+                bool result = UserPersistence.UpdateUserName(Users);
                 if (result)
                 {
                     ViewBag.message = "User Updated";
@@ -192,11 +189,11 @@ namespace SqliteDemo.Controllers
                     Salt = salt,
                     HashPassword = EncryptionManager.EncodePassword("abc123", salt),
                     IsAdmin = 0,
-                    Status = 0
+                    Status = newStatus
 
                 };
 
-                bool result = UserPersistence.UpdateUser(Users);
+                bool result = UserPersistence.UpdateUserName(Users);
                 if (result)
                 {
                     ViewBag.message = "User Updated";
@@ -211,8 +208,10 @@ namespace SqliteDemo.Controllers
 
         }
 
+
+
         [HttpGet]
-        public ActionResult ChangeUserName(string name)
+        public ActionResult UserName(string name)
         {
             name = (string)Session["UserId"];
             User user = UserPersistence.getUserName(name);
@@ -221,10 +220,10 @@ namespace SqliteDemo.Controllers
                 return HttpNotFound();
             }
             Session["user"] = user;
-            return View("ChangeUser", user);
+            return View("UserName", user);
         }
         [HttpPost]
-        public ActionResult ChangeUserName(User newUser)
+        public ActionResult UserName(User newUser)
         {
 
             string newEmail = newUser.EmailAddress;
@@ -312,6 +311,7 @@ namespace SqliteDemo.Controllers
             return View(newUser);
 
         }
+
     }
 
 }
