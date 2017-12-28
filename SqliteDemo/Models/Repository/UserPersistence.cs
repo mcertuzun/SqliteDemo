@@ -120,14 +120,15 @@ namespace SqliteDemo.Models.Repository
             return true;
         }
 
-        public static bool UpdateUserEmail(User ChangeUser)
+        public static bool UpdateUser(User ChangeUser)
         {
             /*
             * This method use a SQL format (update) to update the 
             * book's title with using it's ISBN number
             */
-            string sql = "Update user Set EmailAddress='"
-                + ChangeUser.EmailAddress + "' Where id=" + ChangeUser.Id + ";";
+            string sql = "Update user SET " +
+                "EmailAddress='"+ ChangeUser.EmailAddress + 
+                "', Name = '"+ ChangeUser.Name +  "' WHERE id=" + ChangeUser.Id + ";";
             RepositoryManager.Repository.DoCommand(sql);
             return true;
         }
@@ -157,8 +158,31 @@ namespace SqliteDemo.Models.Repository
             };
             return user;
         }
-        
 
+        public static User getUserID(decimal id)
+        {
+            string sqlQuery = "select * from user where id=" + id;
+            List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
+            // It is choosing first user.
+            object[] dataRow = rows[0];
+            if (rows.Count == 0)
+            {
+                return null;
+            }
+
+
+            User user = new User
+            {
+                Id = (decimal)dataRow[0],
+                Name = (string)dataRow[1],
+                EmailAddress = (string)dataRow[2],
+                Salt = (string)dataRow[3],
+                HashPassword = (string)dataRow[4],
+                IsAdmin = (decimal)dataRow[5],
+                Status = (decimal)dataRow[6]
+            };
+            return user;
+        }
 
         public static bool DeleteUser(User DelUser)
         {
