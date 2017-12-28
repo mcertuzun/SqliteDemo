@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using SqliteDemo.Models.Entity;
 using SqliteDemo.Models.Transaction;
+using SqliteDemo.Models.Repository;
 
 namespace SqliteDemo.Controllers
 {
@@ -51,7 +52,35 @@ namespace SqliteDemo.Controllers
             }
          
         }
-        
+
+
+     
+        [HttpPost]
+        public ActionResult CommentAdd(String textin)
+        {
+            string t = textin.Replace("<", "&lt");
+            string t1 = t.Replace(">", "&gt");
+            string t2 = t1.Replace("(", "&#40");
+            string t3 = t2.Replace(")", "&#41");
+            string t4 = t3.Replace("&", "&#38");
+            string tfinal = t4.Replace("|", "&#124");
+            bool result = EventPersistence.AddComment(textin);
+
+
+            if (result)
+            {
+                ViewBag.message = "Commited";
+            }
+            else
+            {
+                ViewBag.message = "Couldnt commited";
+            }
+            ViewBag.message = "You Entered This: " + tfinal;
+
+            return View("ListEvents");
+
+        }
+       
 
 
         [HttpGet]
@@ -64,31 +93,19 @@ namespace SqliteDemo.Controllers
         public ActionResult AddEvent(Events newEvent)
         {
             
-            if (newEvent.EventName == null)
+            if (newEvent.EventName == null || newEvent == null)
             {
                 ViewBag.message = "Error: Invalid Request - please try again with choosing a name";
                 return View(new Events());
             }
-            if (newEvent == null)
-            {
-                ViewBag.message = "Error: Invalid Request - please try again";
-                return View(new Events());
-            }
-            if (newEvent.EventId.ToString().Length == 0)
-            {
-                ViewBag.message = "Error: An Id is required";
-                return View(newEvent);
-            }
-            if (newEvent.UserId.ToString().Length == 0)
-            {
-                ViewBag.message = "Error: An User Id is required";
-                return View(newEvent);
-            }
+       
+            
             
             
             bool result = EventManager.AddNewEvent(newEvent);
             if (result)
             {
+                TempData["message"]= "Event added"; 
                 ViewBag.message = "Event added";
             }
             else

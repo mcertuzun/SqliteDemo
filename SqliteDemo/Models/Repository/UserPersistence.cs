@@ -21,6 +21,7 @@ namespace SqliteDemo.Models.Repository
             string salt = EncryptionManager.PasswordSalt;
            User Users= new User
             {
+
                 Id = 0,
                 Name = "admin",
                 EmailAddress = "admin@gmail.com",

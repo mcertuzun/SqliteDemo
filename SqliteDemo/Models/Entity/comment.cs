@@ -5,20 +5,20 @@ using System.Web;
 
 namespace SqliteDemo.Models.Entity
 {
-    public class comment
+    public class Comment
     {
         public int CommentId { get; set; }
         public int EventId { get; set; }
         public string Text { get; set; }
-      
 
 
-        public comment()
+
+        public Comment()
         {
 
         }
 
-        public comment (int CommentId1, int EventId1, string Text1)
+        public Comment(int CommentId1, int EventId1, string Text1)
         {
             CommentId = CommentId1;
             EventId = EventId1;

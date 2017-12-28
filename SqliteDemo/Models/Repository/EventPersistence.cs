@@ -22,6 +22,22 @@ namespace SqliteDemo.Models.Repository
             List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
             return rows.Count;
         }
+        public static decimal CounttComment()
+        {
+            string sqlQuery = "select * from comment";
+            List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
+            return rows.Count;
+        }
+        public static bool AddComment(string value)
+        {
+
+            string sql = "INSERT INTO comment(CommentId, EventId, Text) VALUES ("
+           + 0+ ", "
+           + 0 + ", '"
+           +value + "' );";
+            RepositoryManager.Repository.DoCommand(sql);
+            return true;
+        }
 
         public static Events GetEvent(int eventId)
         {
@@ -57,6 +73,7 @@ namespace SqliteDemo.Models.Repository
 
             return events;
         }
+        
         public static Events getEvent(Events keyEvent)
         {
             string sqlQuery = "select * from events where eventId=" + keyEvent.EventId;
@@ -82,10 +99,13 @@ namespace SqliteDemo.Models.Repository
         {
 
             Event.EventId = Countt();
-            string sql = "INSERT INTO events(eventId, userId, EventName) VALUES ("
+            string sql = "INSERT INTO events(eventId, userId, EventName, Date, Information,PhotoURL) VALUES ("
            + Event.EventId + ", "
            + Event.UserId + ", '"
-           + Event.EventName + "' );";
+           + Event.EventName + "' ,'" 
+           + Event.Date + "' ,'"
+           + Event.Information + "' ,'"
+           + Event.PhotoURL + "' );";
             RepositoryManager.Repository.DoCommand(sql);
             return true;
         }

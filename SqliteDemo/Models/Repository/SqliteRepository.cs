@@ -120,11 +120,11 @@ namespace SqliteTest.Models.Repository
                 DoCommand(sql);
                
 
-                string events = "CREATE TABLE events (eventId DECIMAL PRIMARY KEY, userId DECIMAL NOT NULL, EventName VARCHAR(25),FOREIGN KEY(userId) REFERENCES user(id))";
+                string events = "CREATE TABLE events (eventId DECIMAL PRIMARY KEY, userId DECIMAL NOT NULL, EventName VARCHAR(25), Date VARCHAR(25),Information VARCHAR(200),PhotoURL VARCHAR(50), FOREIGN KEY(userId) REFERENCES user(id))";
                 DoCommand(events);
               
 
-                string comment = "CREATE TABLE comment (CommentId Integer, EventId Integer ,Text VARCHAR(500), PRIMARY KEY(CommentId),FOREIGN KEY(EventId) REFERENCES events(eventId))";
+                string comment = "CREATE TABLE comment (CommentId DECIMAL, EventId DECIMAL ,Text VARCHAR(500), PRIMARY KEY(CommentId),FOREIGN KEY(EventId) REFERENCES events(eventId))";
                 DoCommand(comment);
                 UserPersistence.addAdmin();
 
