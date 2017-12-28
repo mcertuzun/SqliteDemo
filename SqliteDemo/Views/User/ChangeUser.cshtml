@@ -7,9 +7,11 @@
 <h2>ChangeUser</h2>
 <form action="~/User/ChangeUser" method="post">
     Choose
-    Userid: <input name="UserId" value="@Model.Name" type="text" />
-    Password: <input name="Password" value="@Model.Password" type="password" />
+    Userid: <input name="Name" value="@Model.Name" type="text" />
+    Email: <input name="EmailAddress" value="@Model.EmailAddress" type="text" />
+  
+  
 
-    <label>Login<input type="submit" value="Login" name="Login" /></label>
+    <label>Save<input type="submit" value="Save" name="Login" /></label>
 </form>
 

@@ -3,6 +3,8 @@ using System.Web.Mvc;
 using SqliteDemo.Models.Entity;
 using SqliteDemo.Models.Transaction;
 using SqliteDemo.Models.Repository;
+using System.Web.Routing;
+
 namespace SqliteDemo.Controllers
 {
     /*
@@ -100,36 +102,92 @@ namespace SqliteDemo.Controllers
             return View(UserEfe);
         }
 
+        public static void RegisterRoutes(RouteCollection routes)
+        {
+            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.MapRoute(
+                name: "Default",
+                url: "{controller}/{action}/{id}",
+                defaults: new
+                {
+                    controller = "Home",
+                    action = "Index",
+                    id = UrlParameter.Optional
+                }
+            );
+        }
         /*
          * This method checks if the newbook is null after that it checks
          * if the ISBN number is 0 after that if the result is true
          * it gives the message of success.
          */
-        [HttpGet]
-        public ActionResult ChangeUser()
-        {
+        /*   public ActionResult Edit(int id = 0)
+          {
+              Movie movie = db.Movies.Find(id);
+              if (movie == null)
+              {
+                  return HttpNotFound();
+              }
+              return View(movie);
+          }
 
-            return View(new User());
+          //
+          // POST: /Movies/Edit/5
+
+         [HttpPost]
+          public ActionResult Edit(Movie movie)
+          {
+              if (ModelState.IsValid)
+              {
+                  db.Entry(movie).State = EntityState.Modified;
+                  db.SaveChanges();
+                  return RedirectToAction("Index");
+              }
+              return View(movie);
+          }*/
+        [HttpGet]
+        public ActionResult ChangeUser(int id)
+        {
+          
+            User user= UserPersistence.getUserID(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            Session["user"]=user;
+            return View("ChangeUser", user);
+
+
         }
         [HttpPost]
         public ActionResult ChangeUser(User newUser)
         {
 
+            string newEmail = newUser.EmailAddress;
+            string newName = newUser.Name;
+
+            newUser =(User) Session["user"];
             if (newUser == null)
             {
-                ViewBag.message = "Error: Invalid Request - please try again";
-                return View(new User());
-            }
+                return View("User", "ChangeUser");
 
-            if (newUser.Id == 0)
+            }
+            string salt = EncryptionManager.PasswordSalt;
+            User Users = new User
             {
-                ViewBag.message = "Error: An id is required";
-                return View(newUser);
-            }
+                Id = newUser.Id,
+                Name = newName,
+                EmailAddress = newEmail,
+                Salt = salt,
+                HashPassword = EncryptionManager.EncodePassword("abc123", salt),
+                IsAdmin = 0,
+                Status = 0
 
-
-            bool result = UserManager.ChangeUser(newUser);
+            };
+            bool result = UserPersistence.UpdateUser(Users);
+    
+     
             if (result)
             {
                 ViewBag.message = "User Updated";
