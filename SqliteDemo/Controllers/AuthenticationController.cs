@@ -12,8 +12,10 @@ namespace SqliteDemo.Controllers
 {
     public class AuthenticationController : Controller
     {
-       
-        // GET: Authentication
+        /*
+         * This class provides to user to login
+         */
+
         public ActionResult Index()
         {
             return View();
@@ -39,6 +41,11 @@ namespace SqliteDemo.Controllers
                 ViewBag.message = "Error: A name is required";
                 return View(us);
             }
+
+            /*
+             * It checks the user inputs are valid or not when the user register
+             * After it checks it returns the  message to the user
+             */
             string validUserId = @"^[a-z][a-z0-9]*$";
             string validPassword = @"^[a-z0-9!@#$*]{5,12}$";
             string validEmail = @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$";
@@ -61,9 +68,9 @@ namespace SqliteDemo.Controllers
                 return View(us);
             }
 
-            //User value=new User();
-
-            // Add the user
+         /*
+         * If it is proper to add, this part adds the user
+         */
 
             bool result = UserManager.AddNewUser(us);
             if (result)
@@ -90,7 +97,10 @@ namespace SqliteDemo.Controllers
    
 
         [HttpPost]
-        //It checks the content of both the userid and password input field to prevent SQL Injection attacks
+        /*
+         * It checks the content of both the userid and password input field to prevent SQL Injection attacks
+        */
+
         public ActionResult Login(Credential credential)
         {
             if (credential == null)
@@ -147,8 +157,9 @@ namespace SqliteDemo.Controllers
             //return View(credential);
         }
 
-        
-
+        /*
+        * This method provides logout with using the model
+       */
 
         public ActionResult Logout()
         {

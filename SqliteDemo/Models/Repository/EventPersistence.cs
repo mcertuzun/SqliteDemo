@@ -7,6 +7,10 @@ using SqliteDemo.Models.Transaction;
 
 namespace SqliteDemo.Models.Repository
 {
+    /*
+    * This class manages CRUD (create, retrieve, update, delete) operations
+    * for events.
+    */
     public class EventPersistence
     {
         private static List<Events> events;
@@ -16,6 +20,7 @@ namespace SqliteDemo.Models.Repository
             events = new List<Events>();
 
         }
+
         public static decimal Countt()
         {
             string sqlQuery = "select * from events";
@@ -28,9 +33,14 @@ namespace SqliteDemo.Models.Repository
             List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
             return rows.Count;
         }
+        /*
+       * Adds comment to the event
+       */
         public static bool AddComment(string value)
         {
-            
+            /*
+            * This method use a SQL format (İnsert İnto) to insert the event
+            */
             string sql = "INSERT INTO comment(CommentId, EventId, Text) VALUES ("
            + CountComment() + ", "
            +0+ ", '"
@@ -39,6 +49,11 @@ namespace SqliteDemo.Models.Repository
             return true;
         }
 
+        /*
+         * Retrieve from the database the book matching the EventId field of
+         * the parameter.
+         * Return null if the event can't be found.
+         */
         public static Events GetEvent(int eventId)
         {
             foreach (Events Event in events)
@@ -50,7 +65,9 @@ namespace SqliteDemo.Models.Repository
             }
             return null;
         }
-
+        /*
+       * Get all event data from the database and return an array of Events.
+       */
         public static List<Events> GetAllEvents()
         {
             List<Events> events = new List<Events>();
@@ -88,7 +105,7 @@ namespace SqliteDemo.Models.Repository
                 return null;
             }
 
-            // Use the data from the first returned row (should be the only one) to create a Book.
+          
             object[] dataRow = rows[0];
 
             Events Event = new Events
@@ -99,9 +116,15 @@ namespace SqliteDemo.Models.Repository
             };
             return Event;
         }
+        /*
+        * Add an event to the database.
+        * Return true if the add succeeds.
+        */
         public static bool AddEvent(Events Event)
         {
-
+            /*
+           * This method use a SQL format (insert into) to insert an event
+           */
             Event.EventId = Countt();
             string sql = "INSERT INTO events(eventId, userId, EventName,Category, Date, Information,PhotoURL) VALUES ("
            + Event.EventId + ", "
@@ -115,11 +138,7 @@ namespace SqliteDemo.Models.Repository
             return true;
         }
 
-        /*
-         * Update a book that is in the database, replacing all field values except
-         * the key field.
-         * Return false if the book is not found, based on key field match.
-         */
+        
 
        public static bool CheckEventname(Events keyEvent)
         {
@@ -136,11 +155,17 @@ namespace SqliteDemo.Models.Repository
                 return true;
         }
 
+        /*
+         * Update an event that is in the database, replacing all field values except
+         * the key field.
+         * Return false if the event is not found, based on key field match.
+         */
+
         public static bool UpdateEvent(Events change)
         {
             /*
             * This method use a SQL format (update) to update the 
-            * book's title with using it's ISBN number
+            * event's name with using it's eventId
             */
             string sql = "Update events Set EventName='"
                 + change.EventName +"userId="+ change.UserId+"' Where eventId=" + change.EventId + ";";
@@ -151,11 +176,15 @@ namespace SqliteDemo.Models.Repository
 
        
         /*
-         * Get one user from the repository, identified by userId 
+         * This method deletes an event
          */
 
         public static bool DeleteEvent(Events delEvent)
         {
+            /*
+            * This method use a SQL format (delete) to delete the 
+            * event with using it's eventId
+            */
             string sql = "delete from events where eventId=" + delEvent.EventId;
             if (RepositoryManager.Repository.DoCommand(sql) == 1)
             {

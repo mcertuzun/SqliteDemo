@@ -8,9 +8,16 @@ using SqliteDemo.Models.Transaction;
 using SqliteDemo.Models.Repository;
 
 namespace SqliteDemo.Controllers
-{
+{    
+        /*
+        * This class provides to add, delete, update and list events
+        * Also it provides making comments for them
+       */
     public class EventController : Controller
     {
+        /*
+        * Handle a request for a listing of events.
+         */
         public ActionResult ListEvents()
         {
             
@@ -24,15 +31,18 @@ namespace SqliteDemo.Controllers
         }
 
         /*
-		 * Handle a GET request for the Add Book form.
-         */
-      
+        * Handle a GET request for the delete event form.
+        */
         [HttpGet]
         public ActionResult DeleteEvent()
         {
             return View(new Events());
         }
 
+        /*
+        * Handle the POST request from the delete event form. The form parameters
+        * are encapsulated in a event object.
+        */
         [HttpPost]
         public ActionResult DeleteEvent(Events newEvent)
         {
@@ -53,8 +63,11 @@ namespace SqliteDemo.Controllers
          
         }
 
+        /*
+        * This mothod provides to add comments on events
+        * It also protected from XSS atacks
+        */
 
-     
         [HttpPost]
         public ActionResult CommentAdd(String textin)
         {
@@ -82,18 +95,23 @@ namespace SqliteDemo.Controllers
 
         }
        
-
-
+        /*
+		 * Handle a GET request for the Add event form.
+         */
+    
         [HttpGet]
         public ActionResult AddEvent()
         {
             return View(new Events());
         }
-
+        /*
+         * Handle the POST request from the Add event form. The form parameters
+         * are encapsulated in a event object.
+         */
         [HttpPost]
         public ActionResult AddEvent(Events newEvent)
         {
-            
+            // Validate event data from the transaction
             if (newEvent.EventName == null || newEvent == null)
             {
                 ViewBag.message = "Error: Invalid Request - please try again with choosing a name";
@@ -121,8 +139,8 @@ namespace SqliteDemo.Controllers
 
 
         /*
-         * This method checks if the newbook is null after that it checks
-         * if the ISBN number is 0 after that if the result is true
+         * This method checks if the newEvent is null after that it checks
+         * if the EventId.Length is 0 after that if the result is true
          * it gives the message of success.
          */
         [HttpGet]

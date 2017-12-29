@@ -5,6 +5,9 @@ using System.Web;
 
 namespace SqliteDemo.Models.Entity
 {
+    /*
+     * This class represents one User.
+    */
     public class User
     {
         public decimal Id { get; set; }
@@ -16,11 +19,18 @@ namespace SqliteDemo.Models.Entity
         public string Salt { get; set; }
         public string Password { get; set; }
 
+        /*
+         * Default constructor - no initialization.
+        */
+
         public User()
         {
 
         }
 
+        /*
+        * Parameterized constructor
+        */
         public User(decimal Id, string Name, string EmailAddress1, string Salt1, string Password, decimal IsAdmin1, decimal Status1)
         {
             this.Id = Id;
