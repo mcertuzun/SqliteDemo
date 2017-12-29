@@ -8,9 +8,13 @@
 
      <table style="width:100%">
     <tr>
-        <th>Event ID</th>
-        <th>User ID</th>
+        <th>Event Id</th>
         <th>Event Name</th>
+        <th>Date</th>
+        <th>Photo</th>
+        <th>Comment</th>
+       
+        
     </tr>
          @{if (Model == null)
              {
@@ -19,16 +23,46 @@
              }
              else
              {
-                foreach (Events events in Model)
-                {
+                 foreach (Events events in Model)
+                 {
                     <tr>
 
                         <td>@events.EventId</td>
-                        <td>@events.UserId</td>
                         <td>@events.EventName</td>
+                        <td>@events.Date </td>
+                        <td>@events.Category</td>
+                        <td>@TempData["comment"]</td>
+                        <td>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="thumbnail">
+                                        <a href="@events.PhotoURL">
+                                            <img src="@events.PhotoURL" alt="Lights" style="width:100%" height="50" width="10">
+                                            <div class="caption">
+                                                <p>  @events.Information</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
 
+                        </td>
+                        <td>
+
+                            <form method="post" action="~/Event/CommentAdd">
+                                <div class="form-group">
+                                    <label for="comment">Comment:</label>
+                                    <textarea class="form-control" name="textin" id="EventTextArea"></textarea>
+                                </div>
+                     
+                        <p><input value="Enter" type="submit"></p>
+                        </form>
+                        </td>
+                        
                     </tr>
-                }
+                    
+                    @Html.Action("DeleteEvent", "Event", new { id = events.EventId });
+                 }
              }
         }    
    

@@ -22,6 +22,22 @@ namespace SqliteDemo.Models.Repository
             List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
             return rows.Count;
         }
+        public static decimal CountComment()
+        {
+            string sqlQuery = "select * from comment";
+            List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
+            return rows.Count;
+        }
+        public static bool AddComment(string value)
+        {
+            
+            string sql = "INSERT INTO comment(CommentId, EventId, Text) VALUES ("
+           + CountComment() + ", "
+           +0+ ", '"
+           +value + "' );";
+            RepositoryManager.Repository.DoCommand(sql);
+            return true;
+        }
 
         public static Events GetEvent(int eventId)
         {
@@ -49,7 +65,11 @@ namespace SqliteDemo.Models.Repository
                 {
                     EventId = (decimal)dataRow[0],
                     UserId = (decimal)dataRow[1],
-                    EventName = (string)dataRow[2]
+                    EventName = (string)dataRow[2],
+                    Category = (string)dataRow[3],
+                    Date = (string)dataRow[4],
+                    Information = (string)dataRow[5],
+                    PhotoURL = (string)dataRow[6]
 
                 };
                 events.Add(evnt);
@@ -57,6 +77,7 @@ namespace SqliteDemo.Models.Repository
 
             return events;
         }
+        
         public static Events getEvent(Events keyEvent)
         {
             string sqlQuery = "select * from events where eventId=" + keyEvent.EventId;
@@ -82,10 +103,14 @@ namespace SqliteDemo.Models.Repository
         {
 
             Event.EventId = Countt();
-            string sql = "INSERT INTO events(eventId, userId, EventName) VALUES ("
+            string sql = "INSERT INTO events(eventId, userId, EventName,Category, Date, Information,PhotoURL) VALUES ("
            + Event.EventId + ", "
            + Event.UserId + ", '"
-           + Event.EventName + "' );";
+           + Event.EventName + "' ,'"
+           + Event.Category + "' ,'"
+           + Event.Date + "' ,'"
+           + Event.Information + "' ,'"
+           + Event.PhotoURL + "' );";
             RepositoryManager.Repository.DoCommand(sql);
             return true;
         }

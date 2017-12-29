@@ -21,6 +21,7 @@ namespace SqliteDemo.Models.Repository
             string salt = EncryptionManager.PasswordSalt;
            User Users= new User
             {
+
                 Id = 0,
                 Name = "admin",
                 EmailAddress = "admin@gmail.com",
@@ -114,9 +115,9 @@ namespace SqliteDemo.Models.Repository
             * This method use a SQL format (update) to update the 
             * book's title with using it's ISBN number
             */
-            string sql = "Update user Set name='"
-                + ChangeUser.Name + "' Where id=" + ChangeUser.Id + ";";
-            RepositoryManager.Repository.DoCommand(sql);
+            string sql = sql = "Update user SET " +
+                "EmailAddress='" + ChangeUser.EmailAddress +
+                "', Name = '" + ChangeUser.Name +   "', Status=" + ChangeUser.Status+" WHERE id=" + ChangeUser.Id + ";";
             return true;
         }
 

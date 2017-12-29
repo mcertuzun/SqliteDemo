@@ -8,7 +8,8 @@
 <form action="~/User/ChangeUser" method="post">
     Choose
     Userid: <input name="Name" value="@Model.Name" type="text" />
-    Email: <input name="EmailAddress" value="@Model.EmailAddress" type="text" />
+    Email:  <input name="EmailAddress" value="@Model.EmailAddress" type="text" />
+    Status: <input name="Status" value="@Model.Status" type="text" required="required" />
   <label>Save<input type="submit" value="Save" name="Login" /></label>
 </form>
 

@@ -146,6 +146,10 @@ namespace SqliteDemo.Controllers
             }
             //return View(credential);
         }
+
+        
+
+
         public ActionResult Logout()
         {
             UserManager.LogoutUser(Session);
