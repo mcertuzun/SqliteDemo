@@ -7,14 +7,34 @@
 <h2>AddEvent</h2>
 <form method="post" action="~/Event/AddEvent">
     @{
-        
-        User a =UserPersistence.getUserName((string)Session["UserId"]);
-        Model.UserId = a.Id;
+
+        User a = UserPersistence.getUserName((string)Session["UserId"]);
+        if (a != null)
+        {
+            Session["AdderID"]= a.Id;
+            
+        } else
+        {
+            ViewBag.message = "You cannot add an event.";
+        }
+
     }
+    <label name="UserId" value="@Model.UserId"></label>
     <p><label>Event Name: <input type="text" name="EventName" value="@Model.EventName" /></label></p>
     <p><label>Enter Date and Time:  <input class="datepicker" data-date-format="mm/dd/yyyy" name="Date" value="@Model.Date" /></label></p>
+    <label>
+        Enter Category:
+        <select name="Category">
+            <option Name="Category" value= "Music" >Music</option>
+            <option Name="Category" value= "Scane"  >Scane</option>
+            <option Name="Category" value= "Sport">Sport</option>
+            <option Name="Category" value= "Other" >Other</option>
+           
+        </select>
+    </label>
+    <!--<p><label>Category: <input type="text" name="Category" value="@Model.Category" /></label></p>-->
     <p><label>Event Information: <input type="text" name="Information" value="@Model.Information" /></label></p>
     <p><label>Photo: <input type="text" name="PhotoURL" placeholder="Enter URL" value="@Model.PhotoURL" /></label></p>
-
     <p><input type="submit" value="Add Event" /></p>
+
 </form>

@@ -22,7 +22,7 @@ namespace SqliteDemo.Models.Repository
             List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
             return rows.Count;
         }
-        public static decimal CounttComment()
+        public static decimal CountComment()
         {
             string sqlQuery = "select * from comment";
             List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
@@ -30,10 +30,10 @@ namespace SqliteDemo.Models.Repository
         }
         public static bool AddComment(string value)
         {
-
+            
             string sql = "INSERT INTO comment(CommentId, EventId, Text) VALUES ("
-           + 0+ ", "
-           + 0 + ", '"
+           + CountComment() + ", "
+           +0+ ", '"
            +value + "' );";
             RepositoryManager.Repository.DoCommand(sql);
             return true;
@@ -65,7 +65,11 @@ namespace SqliteDemo.Models.Repository
                 {
                     EventId = (decimal)dataRow[0],
                     UserId = (decimal)dataRow[1],
-                    EventName = (string)dataRow[2]
+                    EventName = (string)dataRow[2],
+                    Category = (string)dataRow[3],
+                    Date = (string)dataRow[4],
+                    Information = (string)dataRow[5],
+                    PhotoURL = (string)dataRow[6]
 
                 };
                 events.Add(evnt);
@@ -99,10 +103,11 @@ namespace SqliteDemo.Models.Repository
         {
 
             Event.EventId = Countt();
-            string sql = "INSERT INTO events(eventId, userId, EventName, Date, Information,PhotoURL) VALUES ("
+            string sql = "INSERT INTO events(eventId, userId, EventName,Category, Date, Information,PhotoURL) VALUES ("
            + Event.EventId + ", "
            + Event.UserId + ", '"
-           + Event.EventName + "' ,'" 
+           + Event.EventName + "' ,'"
+           + Event.Category + "' ,'"
            + Event.Date + "' ,'"
            + Event.Information + "' ,'"
            + Event.PhotoURL + "' );";

@@ -120,7 +120,7 @@ namespace SqliteTest.Models.Repository
                 DoCommand(sql);
                
 
-                string events = "CREATE TABLE events (eventId DECIMAL PRIMARY KEY, userId DECIMAL NOT NULL, EventName VARCHAR(25), Date VARCHAR(25),Information VARCHAR(200),PhotoURL VARCHAR(50), FOREIGN KEY(userId) REFERENCES user(id))";
+                string events = "CREATE TABLE events (eventId DECIMAL PRIMARY KEY, userId DECIMAL NOT NULL, EventName VARCHAR(25),Category VARCHAR(25), Date VARCHAR(25),Information VARCHAR(200),PhotoURL VARCHAR(50), FOREIGN KEY(userId) REFERENCES user(id))";
                 DoCommand(events);
               
 

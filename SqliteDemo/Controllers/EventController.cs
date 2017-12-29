@@ -64,6 +64,7 @@ namespace SqliteDemo.Controllers
             string t3 = t2.Replace(")", "&#41");
             string t4 = t3.Replace("&", "&#38");
             string tfinal = t4.Replace("|", "&#124");
+           ;
             bool result = EventPersistence.AddComment(textin);
 
 
@@ -75,9 +76,9 @@ namespace SqliteDemo.Controllers
             {
                 ViewBag.message = "Couldnt commited";
             }
-            ViewBag.message = "You Entered This: " + tfinal;
+            TempData["comment"] = tfinal;
 
-            return View("ListEvents");
+            return RedirectToAction("ListEvents","Event");
 
         }
        
@@ -98,10 +99,11 @@ namespace SqliteDemo.Controllers
                 ViewBag.message = "Error: Invalid Request - please try again with choosing a name";
                 return View(new Events());
             }
-       
-            
-            
-            
+
+
+            newEvent.UserId =(decimal) Session["AdderID"];
+
+
             bool result = EventManager.AddNewEvent(newEvent);
             if (result)
             {
