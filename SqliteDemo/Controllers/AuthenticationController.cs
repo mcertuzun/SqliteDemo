@@ -151,7 +151,7 @@ namespace SqliteDemo.Controllers
             }
             else
             {
-                TempData["message"] = "Invalid login attempt";
+                TempData["Username"] = "You need to register first";
                 return View(credential);
             }
             //return View(credential);
