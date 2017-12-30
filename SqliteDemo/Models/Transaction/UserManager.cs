@@ -15,10 +15,8 @@ namespace SqliteDemo.Models.Transaction
   
             bool userChecker = UserPersistence.CheckUsername(newUser);
 
-            // oldBook should be null, if this is a new book
             if (userChecker == true)
             {
-                // set tomorrow as the official date added
                 string salt = EncryptionManager.PasswordSalt;
                 newUser.HashPassword = EncryptionManager.EncodePassword(newUser.Password, salt);
                 newUser.Salt = salt;
@@ -31,8 +29,8 @@ namespace SqliteDemo.Models.Transaction
 
 
         /*
-         * Transaction: Delete a book from the database
-         * Returns true iff the book exists in the database and
+         * Transaction: Delete an user from the database
+         * Returns true if the user exists in the database and
          * it was successfully deleted.
          */
         public static bool DeleteUser(User delUser)
@@ -46,8 +44,8 @@ namespace SqliteDemo.Models.Transaction
 
 
         /*
-         * Transaction: Update a book in the database
-         * Returns true iff the book exists in the database and
+         * Transaction: Update an user in the database
+         * Returns true if the user exists in the database and
          * it was successfully changed.
          */
         public static bool ChangeUser(User changeUser)

@@ -28,8 +28,8 @@ namespace SqliteDemo.Models.Transaction
 
 
         /*
-         * Transaction: Delete a book from the database
-         * Returns true iff the book exists in the database and
+         * Transaction: Delete an event from the database
+         * Returns true if the event exists in the database and
          * it was successfully deleted.
          */
         public static bool DeleteEvent(Events delEvent)
@@ -42,8 +42,8 @@ namespace SqliteDemo.Models.Transaction
         }
        
         /*
-         * Transaction: Update a book in the database
-         * Returns true iff the book exists in the database and
+         * Transaction: Update an event in the database
+         * Returns true if the event exists in the database and
          * it was successfully changed.
          */
         public static bool ChangeEvent(Events changeEvent)
@@ -54,7 +54,9 @@ namespace SqliteDemo.Models.Transaction
             }
             return EventPersistence.UpdateEvent(changeEvent);
         }
-
+        /*
+         * This method takes all events to list to array
+         */
         public static Events[] GetAllEvents()
         {
             List<Events> events = EventPersistence.GetAllEvents();

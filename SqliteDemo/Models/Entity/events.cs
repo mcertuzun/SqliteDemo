@@ -5,6 +5,9 @@ using System.Web;
 
 namespace SqliteDemo.Models.Entity
 {
+    /*
+   * This class represents one Event.
+   */
     public class Events
     {
         public decimal EventId { get; set; }
@@ -16,11 +19,17 @@ namespace SqliteDemo.Models.Entity
         public string PhotoURL { get; set; }
         public string Comment { get; set; }
 
+        /*
+         * Default constructor - no initialization.
+        */
         public Events()
         {
 
         }
 
+        /*
+        * Parameterized constructor
+        */
         public Events(int EventId1, int UserId1, string EventName1)
         {
             EventId = EventId1;

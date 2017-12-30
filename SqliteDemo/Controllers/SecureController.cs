@@ -10,7 +10,9 @@ namespace SqliteDemo.Controllers
 {
     public class SecureController : Controller
     {
-        // GET: Secure
+        /*
+        * this class provides secure
+        */
         public ActionResult Index()
         {
 

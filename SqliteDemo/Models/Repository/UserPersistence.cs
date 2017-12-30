@@ -5,10 +5,12 @@ using SqliteDemo.Models.Transaction;
 
 namespace SqliteDemo.Models.Repository
 {
+    /*
+    * This class manages CRUD (create, retrieve, update, delete) operations
+    * for users.
+    */
     public class UserPersistence
     {
-
-      
         private static List<User> users;
 
         static UserPersistence()
@@ -16,6 +18,9 @@ namespace SqliteDemo.Models.Repository
             users = new List<User>();
            
         }
+        /*
+         * This method adds an admin that's name is admin and password is abc123
+         */
         public static void addAdmin()
         {
             string salt = EncryptionManager.PasswordSalt;
@@ -33,6 +38,9 @@ namespace SqliteDemo.Models.Repository
             };
             AddUser(Users);
         }
+        /*
+         * This method checks the user name with the sql statement
+         */
         public static bool CheckUsername(User KeyUser)
         {
             string sqlQuery = "select * from user where name='" + KeyUser.Name +"'";
@@ -89,10 +97,16 @@ namespace SqliteDemo.Models.Repository
 
             return users;
         }
-        
+        /*
+       * Add a user to the database.
+       * Return true if the add succeeds.
+       */
         public static bool AddUser(User user)
         {
-                user.Id = Countt();
+            /*
+         * This method use a SQL format (insert into) to insert an user
+         */
+            user.Id = Countt();
                 string sql = "INSERT INTO user(Id,Name ,EmailAddress ,Salt ,HashedPassword ,IsAdmin ,Status )VALUES("
                 + user.Id + ", '"
                 + user.Name + "', '"
@@ -105,15 +119,15 @@ namespace SqliteDemo.Models.Repository
             return true;        
         }
         /*
-         * Update a book that is in the database, replacing all field values except
+         * Update the user name that is in the database, replacing all field values except
          * the key field.
-         * Return false if the book is not found, based on key field match.
+         * Return false if the user is not found, based on key field match.
          */
         public static bool UpdateUserName(User ChangeUser)
         {
             /*
             * This method use a SQL format (update) to update the 
-            * book's title with using it's ISBN number
+            * user's emailAddress, name and status with using it's id
             */
             string sql = sql = "Update user SET " +
                 "EmailAddress='" + ChangeUser.EmailAddress +
@@ -125,7 +139,7 @@ namespace SqliteDemo.Models.Repository
         {
             /*
             * This method use a SQL format (update) to update the 
-            * book's title with using it's ISBN number
+            * User's emailAddress, Name with using it's id
             */
             string sql = "Update user SET " +
                 "EmailAddress='"+ ChangeUser.EmailAddress + 

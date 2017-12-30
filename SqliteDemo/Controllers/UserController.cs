@@ -8,12 +8,12 @@ using System.Web.Routing;
 namespace SqliteDemo.Controllers
 {
     /*
-     * This Controller handles requests related to Books.
+     * This Controller handles requests related to Events.
      */
     public class UserController : Controller
     {
         /*
-         * Handle a request for a listing of books.
+         * Handle a request for a listing of events.
          */
         public ActionResult List()
         {
@@ -22,7 +22,7 @@ namespace SqliteDemo.Controllers
         }
 
         /*
-		 * Handle a GET request for the Add Book form.
+		 * Handle a GET request for the Add User form.
          */
         [HttpGet]
         public ActionResult AddUser()
@@ -64,13 +64,13 @@ namespace SqliteDemo.Controllers
             return View("List", users);
         }
         /*
-         * Handle the POST request from the Add Book form. The form parameters
-         * are encapsulated in a Book object.
+         * Handle the POST request from the Add Event form. The form parameters
+         * are encapsulated in a Events object.
          */
         [HttpPost]
         public ActionResult AddUser(User UserEfe)
         {
-            // Validate book data from the transaction
+            // Validate event data from the transaction
             if (UserEfe == null)
             {
                 ViewBag.message = "Error: Invalid Request - please try again";
@@ -102,8 +102,11 @@ namespace SqliteDemo.Controllers
             return View(UserEfe);
         }
 
-       
-       
+         /*
+          * This method provides update the users informations
+          * after it checks new informations are valid or not
+          */
+
         [HttpGet]
         public ActionResult ChangeUser(int id)
         {
@@ -208,7 +211,9 @@ namespace SqliteDemo.Controllers
 
         }
 
-
+        /*
+        * This method provides to change user's name
+        */
 
         [HttpGet]
         public ActionResult UserName(string name)
