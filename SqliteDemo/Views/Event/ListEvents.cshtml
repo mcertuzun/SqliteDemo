@@ -14,8 +14,6 @@
         <th>Category</th>
         <th>Photo</th>
         <th>Comment</th>
-       
-        
     </tr>
 
          @{
@@ -47,26 +45,20 @@
                                 </div>
                             </div>
                         </td>
-                        <td></td>
-                       
+
+                       @{ 
+                            Comment a = EventPersistence.FindComment(events.EventId);
+                        }
+                        <td>@a.Text</td>
                         <td>
                         <form method="post" action="~/Event/CommentAdd">
                             <div class="input-group">
-                                Username: <input type="text" class="form-control" placeholder="Comment" aria-describedby="basic-addon1" name="Comment" value="@events.Comment">
+                                Comment: <input type="text" class="form-control" placeholder="Comment" aria-describedby="basic-addon1" name="Comment" value="@events.Comment">
                             </div>
-                            
                             <button type="submit" value="Save" ame="Save" class="btn btn-default">Save</button>
-                          
                         </form></td>
-                            
-                       
-                        
-                        
                     </tr>
-
-                    
                  }
-
          }
         }    
         

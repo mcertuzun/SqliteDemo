@@ -47,14 +47,15 @@ namespace SqliteDemo.Models.Repository
            +value.Text + "' );";
             RepositoryManager.Repository.DoCommand(sql);
             return true;
-        }
 
-        /*
-         * Retrieve from the database the book matching the EventId field of
-         * the parameter.
-         * Return null if the event can't be found.
-         */
-        public static Events GetEvent(int eventId)
+        }
+        
+    /*
+     * Retrieve from the database the book matching the EventId field of
+     * the parameter.
+     * Return null if the event can't be found.
+     */
+    public static Events GetEvent(int eventId)
         {
             foreach (Events Event in events)
             {
@@ -89,7 +90,7 @@ namespace SqliteDemo.Models.Repository
                     PhotoURL = (string)dataRow[6]
 
                 };
-                events.Add(evnt);
+               
             }
 
             return events;
@@ -99,7 +100,6 @@ namespace SqliteDemo.Models.Repository
         {
             string sqlQuery = "select * from events where eventId=" + keyEvent.EventId;
             List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
-            //System.Console.WriteLine("$$rows: " + rows.Count);
             if (rows.Count == 0)
             {
                 return null;
