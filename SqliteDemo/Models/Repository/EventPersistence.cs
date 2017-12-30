@@ -43,32 +43,10 @@ namespace SqliteDemo.Models.Repository
             */
             string sql = "INSERT INTO comment(CommentId, EventId, Text) VALUES ("
            + CountComment() + ", "
-           +value.EventId+ ", '"
-           +value.Text + "' );";
+           + value.EventId + ", '"
+           + value.Text + "' );";
             RepositoryManager.Repository.DoCommand(sql);
             return true;
-
-        }
-        public static Comment FindComment(decimal value)
-        {
-            /*
-            * This method use a SQL format (Insert Into) to insert the event
-            */
-            string sqlQuery = "select * from events where eventId=" + value;
-            List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
-            if (rows.Count == 0)
-            {
-                return null;
-            }
-            object[] dataRow = rows[0];
-            Comment com = new Comment
-            {
-                CommentId = (decimal)dataRow[0],
-                EventId = (decimal)dataRow[1],
-                Text = (string)dataRow[2]
-            };
-
-            return com;
         }
 
         public static List<Comment> GetAllComments()
@@ -159,22 +137,23 @@ namespace SqliteDemo.Models.Repository
                     PhotoURL = (string)dataRow[6]
 
                 };
-               
+                events.Add(evnt);
             }
 
             return events;
         }
-        
+
         public static Events getEvent(Events keyEvent)
         {
             string sqlQuery = "select * from events where eventId=" + keyEvent.EventId;
             List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
+            //System.Console.WriteLine("$$rows: " + rows.Count);
             if (rows.Count == 0)
             {
                 return null;
             }
 
-          
+
             object[] dataRow = rows[0];
 
             Events Event = new Events
@@ -217,24 +196,24 @@ namespace SqliteDemo.Models.Repository
            * This method use a SQL format (insert into) to insert an event
            */
             Event.EventId = Countt();
-           string sql = "INSERT INTO events(eventId, userId, EventName,Category, Date, Information,PhotoURL) VALUES ("
-           + Event.EventId + ", "
-           + Event.UserId + ", '"
-           + Event.EventName + "' ,'"
-           + Event.Category + "' ,'"
-           + Event.Date + "' ,'"
-           + Event.Information + "' ,'"
-           + Event.PhotoURL + "' );";
+            string sql = "INSERT INTO events(eventId, userId, EventName,Category, Date, Information,PhotoURL) VALUES ("
+            + Event.EventId + ", "
+            + Event.UserId + ", '"
+            + Event.EventName + "' ,'"
+            + Event.Category + "' ,'"
+            + Event.Date + "' ,'"
+            + Event.Information + "' ,'"
+            + Event.PhotoURL + "' );";
             RepositoryManager.Repository.DoCommand(sql);
-            
+
             return true;
         }
 
-        
 
-       public static bool CheckEventname(Events keyEvent)
+
+        public static bool CheckEventname(Events keyEvent)
         {
-            
+
             string sqlQuery = "select * from events where EventName='" + keyEvent.EventName + "'";
             List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
 
@@ -260,13 +239,13 @@ namespace SqliteDemo.Models.Repository
             * event's name with using it's eventId
             */
             string sql = "Update events Set EventName='"
-                + change.EventName +"userId="+ change.UserId+"' Where eventId=" + change.EventId + ";";
+                + change.EventName + "userId=" + change.UserId + "' Where eventId=" + change.EventId + ";";
             RepositoryManager.Repository.DoCommand(sql);
             return true;
         }
 
 
-       
+
         /*
          * This method deletes an event
          */
@@ -286,3 +265,4 @@ namespace SqliteDemo.Models.Repository
         }
     }
 }
+
