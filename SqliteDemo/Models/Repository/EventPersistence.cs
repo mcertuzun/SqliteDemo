@@ -148,7 +148,7 @@ namespace SqliteDemo.Models.Repository
            * This method use a SQL format (insert into) to insert an event
            */
             Event.EventId = Countt();
-            string sql = "INSERT INTO events(eventId, userId, EventName,Category, Date, Information,PhotoURL) VALUES ("
+           string sql = "INSERT INTO events(eventId, userId, EventName,Category, Date, Information,PhotoURL) VALUES ("
            + Event.EventId + ", "
            + Event.UserId + ", '"
            + Event.EventName + "' ,'"
@@ -157,6 +157,7 @@ namespace SqliteDemo.Models.Repository
            + Event.Information + "' ,'"
            + Event.PhotoURL + "' );";
             RepositoryManager.Repository.DoCommand(sql);
+            
             return true;
         }
 

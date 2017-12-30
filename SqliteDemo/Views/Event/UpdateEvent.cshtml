@@ -2,7 +2,7 @@
     ViewBag.Title = "UpdateEvent";
 }
 @using SqliteDemo.Models.Entity;
-@model Events[]
+@model Events
 
 <h2>UpdateEvent</h2>
 
@@ -13,14 +13,8 @@
         <th>Event Name</th>
     </tr>
     
-    @{if (Model == null)
-        {
-            ViewBag.message = "There is not event";
-
-        }
-        else
-        {
-            foreach (Events events in Model)
+    @{
+            foreach (Events events in (List<Events>)ViewData["events"])
             {
                 <tr>
 
@@ -29,10 +23,14 @@
                     <td>@events.EventName</td>
 
                 </tr>
-            }
-        }
+            }        
     }
 
     
     
 </table>
+<td>
+<form method="post" action="~/Event/UpdateEvent">
+    <button type="submit" value="Change" ame="Change" class="btn btn-default">Change</button>
+
+</form></td>
