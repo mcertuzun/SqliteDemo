@@ -27,6 +27,19 @@ namespace SqliteDemo.Controllers
 		 * Handle a GET request for the Add Book form.
          */
       
+        /*    [HttpPost]
+            public ActionResult SearchEvent(string value)
+        {
+            if (value == null)
+            {
+
+            }
+            List<Events> events = EventPersistence.GetAllEvents();
+     
+        }*/
+
+
+
         [HttpGet]
         public ActionResult DeleteEvent()
         {
