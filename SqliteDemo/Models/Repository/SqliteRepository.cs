@@ -116,23 +116,25 @@ namespace SqliteTest.Models.Repository
             bool openResult = Open();
             if (success & openResult)
             {
-                string sql = "CREATE TABLE user (id DECIMAL, name VARCHAR(25),EmailAddress VARCHAR(50),salt VARCHAR(150), HashedPassword VARCHAR(150), IsAdmin DECIMAL, Status DECIMAL, PRIMARY KEY(id))";
+                string sql = "CREATE TABLE user (id DECIMAL, name VARCHAR(25),EmailAddress VARCHAR(50),salt VARCHAR(150), HashedPassword VARCHAR(150), IsAdmin DECIMAL, Status DECIMAL, PRIMARY KEY (id))";
                 DoCommand(sql);
                
 
-                string events = "CREATE TABLE events (eventId DECIMAL PRIMARY KEY, userId DECIMAL NOT NULL, EventName VARCHAR(25),Category VARCHAR(25), Date VARCHAR(25),Information VARCHAR(200),PhotoURL VARCHAR(50), FOREIGN KEY(userId) REFERENCES user(id))";
+                string events = "CREATE TABLE events (eventId DECIMAL PRIMARY KEY, userId DECIMAL NOT NULL, EventName VARCHAR(25),Category VARCHAR(25), Date VARCHAR(25),Information VARCHAR(200),PhotoURL VARCHAR(50), FOREIGN KEY (userId) REFERENCES user(id))";
                 DoCommand(events);
-              
+              UserPersistence.addAdmin();
 
-                string comment = "CREATE TABLE comment (CommentId DECIMAL, EventId DECIMAL ,Text VARCHAR(500), PRIMARY KEY(CommentId),FOREIGN KEY(EventId) REFERENCES events(eventId))";
+                string comment = "CREATE TABLE comment (CommentId DECIMAL, EventId DECIMAL ,Text VARCHAR(500), PRIMARY KEY (CommentId), FOREIGN KEY (EventId) REFERENCES events (eventId))";
                 DoCommand(comment);
-                UserPersistence.addAdmin();
-
-                string sql1 = "INSERT INTO events (eventId, userId, EventName,Category, Date, Information,PhotoURL) VALUES (0, 0, 'Event1', 'opera', '25.12.2016', 'Good one', 'noURL');";
+                
+                string sql1 = "INSERT INTO events (eventId, userId, EventName,Category, Date, Information,PhotoURL) VALUES (0, 0, 'Event1', 'opera', '25.12.2016', 'Good one', 'http://www.opera-nice.org/media/image/cms/media/Contenu_statique/salle-opera.jpg');";
                 DoCommand(sql1);
 
-                string sql2 = "INSERT INTO events (eventId, userId, EventName,Category, Date, Information,PhotoURL) VALUES (0, 0, 'Event1', 'opera', '25.12.2016', 'Good one', 'noURL');";
-                DoCommand(sql1);
+                string sql2 = "INSERT INTO events (eventId, userId, EventName,Category, Date, Information,PhotoURL) VALUES (1, 0, 'Event2', 'music', '31.10.2016', 'Bad Event', 'https://az616578.vo.msecnd.net/files/2017/03/05/636243282134517774-314545726_music9.jpg');";
+                DoCommand(sql2);
+
+                string sql3 = "INSERT INTO events (eventId, userId, EventName,Category, Date, Information,PhotoURL) VALUES (2, 0, 'Event3', 'dance', '20.08.2016', 'Sucks', 'noURL');";
+                DoCommand(sql3);
             }
             
            
