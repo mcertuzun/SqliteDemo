@@ -182,7 +182,8 @@ namespace SqliteDemo.Controllers
         [HttpGet]
         public ActionResult UpdateEvent()
         {
-
+            List<Events> events = EventPersistence.GetAllEvents();
+            ViewData["events"] = events;
             return View(new Events());
         }
         [HttpPost]

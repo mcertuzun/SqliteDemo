@@ -11,7 +11,7 @@ namespace SqliteTest.Models.Repository
     public class SqliteRepository : IRepository
     {
         // Location of the database file 
-        private string databaseFile = "C:\\Users\\mcan.ertuzun\\MyDatabase.sqlite";
+        private string databaseFile = "C:\\Users\\EFE\\MyDatabase.sqlite";
 
         private SQLiteConnection dbConnection;
 
@@ -128,6 +128,11 @@ namespace SqliteTest.Models.Repository
                 DoCommand(comment);
                 UserPersistence.addAdmin();
 
+                string sql1 = "INSERT INTO events (eventId, userId, EventName,Category, Date, Information,PhotoURL) VALUES (0, 0, 'Event1', 'opera', '25.12.2016', 'Good one', 'noURL');";
+                DoCommand(sql1);
+
+                string sql2 = "INSERT INTO events (eventId, userId, EventName,Category, Date, Information,PhotoURL) VALUES (0, 0, 'Event1', 'opera', '25.12.2016', 'Good one', 'noURL');";
+                DoCommand(sql1);
             }
             
            
