@@ -98,29 +98,21 @@ namespace SqliteDemo.Controllers
         * This mothod provides to add comments on events
         * It also protected from XSS atacks
         */
-        [HttpGet]
-        public ActionResult CommentAdd(int id)
-        {
-
-            Events evnt = EventPersistence.GetEvent(id);
-            if (evnt == null)
-            {
-                return HttpNotFound();
-            }
-            Session["Event"] = evnt;
-            return View("CommentAdd", evnt);
-        }
+     
         [HttpPost]
-        public ActionResult CommentAdd(Comment textin)
+        public ActionResult CommentAdd(Events textin)
         {
-            string t = textin.Text.Replace("<", "&lt");
+            string t = textin.Comment.Replace("<", "&lt");
             string t1 = t.Replace(">", "&gt");
             string t2 = t1.Replace("(", "&#40");
             string t3 = t2.Replace(")", "&#41");
             string t4 = t3.Replace("&", "&#38");
             string tfinal = t4.Replace("|", "&#124");
-            textin.EventId= (decimal)ViewData["UserData"];
-            bool result = EventPersistence.AddComment(textin);
+           
+            Comment com = new Comment();
+            com.EventId = textin.EventId;
+            com.Text = textin.Comment;
+            bool result = EventPersistence.AddComment(com);
 
 
             if (result)
