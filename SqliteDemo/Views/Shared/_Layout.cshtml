@@ -21,7 +21,7 @@
             right: 10%;
         }
         body {
-            background-image: url("http://wikimotive.com/wikiblog/wp-content/uploads/sites/2/2013/10/events-heavenly-header1.jpg ");
+            
             background-repeat: no-repeat;
             background-size: cover;
         }
@@ -51,6 +51,7 @@
                     <li>@Html.ActionLink("Index", "Index", "Home")</li>
                     <li>@Html.ActionLink("Login", "Login", "Authentication")</li>
                     <li>@Html.ActionLink("Register", "Register", "Authentication")</li>
+                    <li>@Html.ActionLink("Search", "SearchEvent", "Event")</li>
                 </ul>
 
             </div> 
@@ -65,6 +66,7 @@
                     <li><a href="~/Event/ListEvents">List All Events</a></li>
                     <li><a href="~/Event/AddEvent">Add an Event</a></li>
                     <li><a href="~/Event/UpdateEvent">Change an Event</a></li>
+                    <li>@Html.ActionLink("Search", "SearchEvent", "Event")</li>
                     <li><a href="~/User/UserName" value="@Session["UserId"]">Edit Profile</a></li>
                     <li><a href="#" id="white">You logged as @Session["UserId"]  </a></li>
                     <li><a href="~/Authentication/logout">Logout</a></li>

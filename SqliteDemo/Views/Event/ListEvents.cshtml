@@ -1,10 +1,10 @@
-﻿@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+﻿@using SqliteDemo.Models.Repository;
 @using SqliteDemo.Models.Entity;
-@model Events[]
-<h4>Event List</h4>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+  }
 
+<h4>Event List</h4>
 
      <table style="width:100%">
     <tr>
@@ -17,22 +17,22 @@
        
         
     </tr>
-         @{if (Model == null)
+
+         @{
+            
+             if (ViewData["eventList"] == null)
              {
                  ViewBag.message = "There is not event";
-
              }
              else
              {
-                 foreach (Events events in Model)
+                 foreach (Events events in (List<Events>)ViewData["eventList"])
                  {
                     <tr>
-
                         <td>@events.EventId</td>
                         <td>@events.EventName</td>
                         <td>@events.Date </td>
                         <td>@events.Category</td>
-                       
                         <td>
                             <div class="row">
                                 <div class="col-md-4">
@@ -46,28 +46,22 @@
                                     </div>
                                 </div>
                             </div>
-
                         </td>
                         <td>@TempData["comment"]</td>
                         <td>
-
-                            <form method="post" action="~/Event/CommentAdd">
-                                <div class="form-group">
-                                    <label for="comment">Comment:</label>
-                                    <textarea  class ="form-control" name="textin" id="EventTextArea"></textarea>
-                                </div>
-                     
-                        <p><input value="Enter" type="submit"></p>
-                        </form>
-                        </td>
+                        <td>@Html.Action("Write Comment", "CommentAdd", new { id = events.EventId })</td>
+                            
+                       
+                        
                         
                     </tr>
+
                     
-                    @Html.Action("DeleteEvent", "Event", new { id = events.EventId });
                  }
-             }
+
+         }
         }    
-   
+        
       </table>
 
 

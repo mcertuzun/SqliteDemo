@@ -10,8 +10,8 @@ namespace SqliteDemo.Models.Entity
     */
     public class Comment
     {
-        public int CommentId { get; set; }
-        public int EventId { get; set; }
+        public decimal CommentId { get; set; }
+        public decimal EventId { get; set; }
         public string Text { get; set; }
 
         /*

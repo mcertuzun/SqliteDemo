@@ -1,0 +1,39 @@
+﻿@using SqliteDemo.Models.Repository;
+@using SqliteDemo.Models.Entity;
+@{
+    ViewBag.Title = "SearchEvent";
+}
+
+<h2>SearchEvent</h2>
+
+<form action="~/Event/SearchEvent" method="post">
+    <h1>Don't stop search event! </h1>
+    <p><input type="text" size="350" placeholder="Search" name="EventName" value="EventName">&emsp; </p>
+    <button type="submit" value="Search" name="Search" class="btn btn-default">Search</button>
+</form>
+@{
+    if (ViewData["events"] != null)
+    {
+       
+        foreach (Events events in (List<Events>)ViewData["events"])
+        {
+
+
+            <div class="row">
+                <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail">
+                        <img src="@events.PhotoURL" alt="...">
+                        <div class="caption">
+                            <h3>@events.EventName</h3>
+                            <p>Date: + @events.Date <br>
+                               Category: + @events.Category <br>
+                               Info: +@events.Information <br>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        }
+    }
+ }

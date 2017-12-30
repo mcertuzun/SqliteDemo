@@ -1,11 +1,12 @@
 ﻿@using SqliteDemo.Models.Repository;
+@using SqliteDemo.Models.Entity;
+
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Home Page";
-
     bool result = RepositoryManager.Repository.Initialize();
-
 }
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,14 +19,15 @@
     </style>
 </head>
 <body>
-    <div class="jumbotron">
-        <center>  <p class="lead"> SEARCH UP</p></center>
-        <div class="jumbotron">
-            <h1>Don't stop search event! </h1>
-            <p class="lead">You can find several types of services, and their rates given by users here. How can we help you?</p>
-            <p><input type="text" name="search" size="350" />&emsp; <input type="button" class="btn btn-primary btn-lg" value="Search &raquo;" /></p>
-        </div>
-    </div>
+         <center>  <p class="lead"> SEARCH UP</p></center>
+            <div class="jumbotron">
+                
+            </div>
+   
+
+
+
+    
 </body>
 </html>
 

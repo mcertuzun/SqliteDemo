@@ -20,30 +20,47 @@ namespace SqliteDemo.Controllers
          */
         public ActionResult ListEvents()
         {
-            
-            Events[] event1 = EventManager.GetAllEvents();
-            if (event1.Length == 0)
+            List<Events> events = EventPersistence.GetAllEvents();
+            if (events != null)
             {
-                ViewBag.message = "There is not event";
-                return View();
+                ViewData["eventList"] = events;
+                return View(events);
             }
-            return View(event1);
+            else
+            {
+                return View("Home", "Index");
+            }
+           
         }
 
         /*
 		 * Handle a GET request for the Add Book form.
          */
-      
-        /*    [HttpPost]
-            public ActionResult SearchEvent(string value)
-        {
-            if (value == null)
-            {
 
-            }
+
+
+        [HttpGet]
+        public ActionResult SearchEvent()
+        {
+            return View(new Events());
+        }
+
+
+        [HttpPost]
+        public ActionResult SearchEvent(Events value)
+        {
+            
             List<Events> events = EventPersistence.GetAllEvents();
-     
-        }*/
+            if (events != null)
+            {
+                ViewData["events"] = events;
+                return View(events.Contains(value));
+            }
+            else
+            {
+                return View("Home", "Index");
+            }
+        }
 
 
 
@@ -81,17 +98,28 @@ namespace SqliteDemo.Controllers
         * This mothod provides to add comments on events
         * It also protected from XSS atacks
         */
-
-        [HttpPost]
-        public ActionResult CommentAdd(String textin)
+        [HttpGet]
+        public ActionResult CommentAdd(int id)
         {
-            string t = textin.Replace("<", "&lt");
+
+            Events evnt = EventPersistence.GetEvent(id);
+            if (evnt == null)
+            {
+                return HttpNotFound();
+            }
+            Session["Event"] = evnt;
+            return View("CommentAdd", evnt);
+        }
+        [HttpPost]
+        public ActionResult CommentAdd(Comment textin)
+        {
+            string t = textin.Text.Replace("<", "&lt");
             string t1 = t.Replace(">", "&gt");
             string t2 = t1.Replace("(", "&#40");
             string t3 = t2.Replace(")", "&#41");
             string t4 = t3.Replace("&", "&#38");
             string tfinal = t4.Replace("|", "&#124");
-           ;
+            textin.EventId= (decimal)ViewData["UserData"];
             bool result = EventPersistence.AddComment(textin);
 
 
@@ -104,7 +132,9 @@ namespace SqliteDemo.Controllers
                 ViewBag.message = "Couldnt commited";
             }
             TempData["comment"] = tfinal;
+            
 
+          
             return RedirectToAction("ListEvents","Event");
 
         }
