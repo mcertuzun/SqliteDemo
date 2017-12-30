@@ -211,13 +211,17 @@ namespace SqliteDemo.Controllers
             {
                 ViewBag.message = "That event could not be Updated";
             }
-            Events[] events = EventManager.GetAllEvents();
+            List<Events> events = EventPersistence.GetAllEvents();
             if (events == null)
             {
-                ViewBag.message =  "There is not event for listing.";
-                return View("Home","Index");
-            }else
-            return View("ListEvents", events);
-        }
+                ViewBag.message = "There is not event for listing.";
+                return View("Home", "Index");
+            }
+            else
+            {
+                ViewData["eventList"] = events; 
+                return View("ChangeEvent", new Events());
+            }
+                }
     }
 }

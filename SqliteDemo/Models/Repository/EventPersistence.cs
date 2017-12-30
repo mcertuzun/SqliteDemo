@@ -191,7 +191,7 @@ namespace SqliteDemo.Models.Repository
             * event's name with using it's eventId
             */
             string sql = "Update events Set EventName='"
-                + change.EventName +"userId="+ change.UserId+"' Where eventId=" + change.EventId + ";";
+                + change.EventName +"',Category='"+ change.Category+ "',Information='" + change.Information + "' Where eventId='" + change.EventId + "';";
             RepositoryManager.Repository.DoCommand(sql);
             return true;
         }

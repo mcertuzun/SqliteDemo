@@ -238,6 +238,7 @@
     <Content Include="Views\User\UserName.cshtml" />
     <Content Include="Views\Event\SearchEvent.cshtml" />
     <Content Include="Views\Event\CommentAdd.cshtml" />
+    <Content Include="Views\Event\ChangeEvent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
