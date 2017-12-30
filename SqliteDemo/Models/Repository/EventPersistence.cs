@@ -48,6 +48,31 @@ namespace SqliteDemo.Models.Repository
             RepositoryManager.Repository.DoCommand(sql);
             return true;
         }
+        public static Comment FindComment(decimal value)
+        {
+            /*
+            * This method use a SQL format (Insert Into) to insert the event
+            */
+            string sqlQuery = "select * from events where eventId=" + value;
+            List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
+            if (rows.Count == 0)
+            {
+                return null;
+            }
+            object[] dataRow = rows[0];
+            Comment com = new Comment
+            {
+                CommentId = (decimal)dataRow[0],
+                EventId = (decimal)dataRow[1],
+                Text = (string)dataRow[2]
+            };
+
+            return com;
+        }
+
+
+
+
 
         /*
          * Retrieve from the database the book matching the EventId field of
