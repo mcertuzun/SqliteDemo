@@ -13,51 +13,62 @@
         <th>Date</th>
         <th>Category</th>
         <th>Photo</th>
+        <th>Input</th>
         <th>Comment</th>
+        
        
         
     </tr>
 
-         @{
-            
-             if (ViewData["eventList"] == null)
-             {
-                 ViewBag.message = "There is not event";
-             }
-             else
-             {
-                 foreach (Events events in (List<Events>)ViewData["eventList"])
-                 {
-                    <tr>
-                        <td>@events.EventId</td>
-                        <td>@events.EventName</td>
-                        <td>@events.Date </td>
-                        <td>@events.Category</td>
-                        <td>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="thumbnail">
-                                        <a href="@events.PhotoURL">
-                                            <img src="@events.PhotoURL" alt="Lights" style="width:100%" height="65" width="65">
-                                            <div class="caption">
-                                               
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                        <td></td>
+                           @{
+
+                               if (ViewData["eventList"] == null)
+                               {
+                                   ViewBag.message = "There is not event";
+                               }
+                               else
+                               {
+                                   foreach (Events events in (List<Events>)ViewData["eventList"])
+                                   {
+                                     <tr>
+                                         <td>@events.EventId</td>
+                                         <td>@events.EventName</td>
+                                         <td>@events.Date </td>
+                                         <td>@events.Category</td>
+
+                                         <td>
+                                             <div class="row">
+                                                 <div class="col-md-4">
+                                                     <div class="thumbnail">
+                                                         <a href="@events.PhotoURL">
+                                                             <img src="@events.PhotoURL" alt="Lights" style="width:100%" height="65" width="65">
+                                                             <div class="caption">
+
+                                                             </div>
+                                                         </a>
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                         </td>
+
+                                         @{
+                                             Comment a = EventPersistence.FindComment(events.EventId);
+                                             if (a != null)
+                                             {
+                                                <td>@a.Text</td>
+                                             }
+                                        } 
+                                 
                        
-                        <td>
+                       
+                      <td>
                         <form method="post" action="~/Event/CommentAdd">
                             <div class="input-group">
                                 Write A Comment <input type="text" class="form-control" placeholder="Comment" aria-describedby="basic-addon1" name="Comment" value="@events.Comment">
                             </div>
-                            
                             <button type="submit" value="Save" ame="Save" class="btn btn-default">Save</button>
-                          
-                        </form></td>
+                        </form>
+                      </td>
                             
                        
                         

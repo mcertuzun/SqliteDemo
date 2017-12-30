@@ -48,12 +48,35 @@ namespace SqliteDemo.Models.Repository
             RepositoryManager.Repository.DoCommand(sql);
             return true;
         }
+
+        public static List<Comment> GetAllComments()
+        {
+            List<Comment> comments = new List<Comment>();
+
+            string sqlQuery = "select * from comment";
+            List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
+
+            foreach (object[] dataRow in rows)
+            {
+
+                Comment com = new Comment
+                {
+                    CommentId = (decimal)dataRow[0],
+                    EventId = (decimal)dataRow[1],
+                    Text = (string)dataRow[2]
+                };
+                comments.Add(com);
+            }
+
+            return comments;
+        }
+
         public static Comment FindComment(decimal value)
         {
             /*
             * This method use a SQL format (Insert Into) to insert the event
             */
-            string sqlQuery = "select * from events where eventId=" + value;
+            string sqlQuery = "select * from comment where CommentId=" + value;
             List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
             if (rows.Count == 0)
             {

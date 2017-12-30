@@ -69,5 +69,18 @@ namespace SqliteDemo.Models.Transaction
                 return (new Events[0]);
             }
         }
+
+        public static Comment[] GetAllComments()
+        {
+            List<Comment> comments = EventPersistence.GetAllComments();
+            if (comments != null)
+            {
+                return EventPersistence.GetAllComments().ToArray();
+            }
+            else
+            {
+                return (new Comment[0]);
+            }
+        }
     }
 }

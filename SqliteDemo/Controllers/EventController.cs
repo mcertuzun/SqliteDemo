@@ -93,7 +93,26 @@ namespace SqliteDemo.Controllers
             }
          
         }
+        [HttpGet]
+        public ActionResult FindComment()
+        {
+            List<Comment> comments = EventPersistence.GetAllComments();
+            ViewData["Comments"] = comments;
+            return View(new Comment());
+        }
 
+        [HttpPost]
+        public ActionResult FindComment(decimal a)
+        {
+
+            Comment result = EventPersistence.FindComment(a);
+            if (result != null)
+            {
+                TempData["Comment"] = result.Text;
+                return View("ListEvents");
+            }
+            return View("ListEvents");
+        }
         /*
         * This mothod provides to add comments on events
         * It also protected from XSS atacks
