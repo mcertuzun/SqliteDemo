@@ -14,20 +14,16 @@ namespace SqliteDemo.Models.Entity
         public decimal EventId { get; set; }
         public string Text { get; set; }
         public string EventName { get; set; }
-
-        /*
+       /*
        * Default constructor - no initialization.
        */
-
         public Comment()
         {
 
         }
-
         /*
         * Parameterized constructor
         */
-
         public Comment(int CommentId1, int EventId1, string Text1)
         {
             CommentId = CommentId1;
