@@ -41,10 +41,11 @@ namespace SqliteDemo.Models.Repository
             /*
             * This method use a SQL format (İnsert İnto) to insert the event
             */
-            string sql = "INSERT INTO comment(CommentId, EventId, Text) VALUES ("
+            string sql = "INSERT INTO comment(CommentId, EventId, Text, EventName) VALUES ("
            + CountComment() + ", "
            + value.EventId + ", '"
-           + value.Text + "' );";
+           + value.Text + "' ,'"
+           + value.EventName + "' );";
             RepositoryManager.Repository.DoCommand(sql);
             return true;
         }
@@ -63,7 +64,8 @@ namespace SqliteDemo.Models.Repository
                 {
                     CommentId = (decimal)dataRow[0],
                     EventId = (decimal)dataRow[1],
-                    Text = (string)dataRow[2]
+                    Text = (string)dataRow[2],
+                    EventName=(string)dataRow[3]
                 };
                 comments.Add(com);
             }
@@ -165,7 +167,7 @@ namespace SqliteDemo.Models.Repository
             return Event;
         }
 
-        public static Events getEvent(int keyEvent)
+        public static Events getEventD(decimal keyEvent)
         {
             string sqlQuery = "select * from events where eventId=" + keyEvent;
             List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);

@@ -1,30 +1,34 @@
 ﻿
-<!DOCTYPE html>
-
-<html>
+<!DOCTYPE html >
+<html lang="en-US">
+<!--[if IE 7]><html lang="en" class="ie7"><![endif]-->
+<!--[if IE 8]><html lang="en" class="ie8"><![endif]-->
+<!--[if IE 9]><html lang="en" class="ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><html lang="en"><![endif]-->
+<!--[if !IE]><html lang="en-US"><![endif]-->
 <head>
     <meta charset="utf-8" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>Search-Up</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
     <style type="text/css">
-        #white {
-            color:ghostwhite;
+            #white {
+                color:ghostwhite;
   
-        }
-        .top-right {
-            position: absolute;
-            top: 70%;
-            right: 10%;
-        }
-        body {
-            background-image: url("https://static1.squarespace.com/static/55c37beae4b0336075603f86/55c3cd80e4b01531b3208f2e/5603032be4b008bd0ad4e6fb/1486126957019/?format=1500w");
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
+            }
+            .top-right {
+                position: absolute;
+                top: 70%;
+                right: 10%;
+            }
+            body {
+                background-image: url("https://static1.squarespace.com/static/55c37beae4b0336075603f86/55c3cd80e4b01531b3208f2e/5603032be4b008bd0ad4e6fb/1486126957019/?format=1500w");
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
     </style>
 
 </head>
@@ -37,7 +41,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="~/Home/Index" class="navbar-brand" area="">Search-Up Home Page</a>
+                <a href="~/Home/Index" class="navbar-brand">Search-Up Home Page</a>
 
             </div>
             
@@ -117,4 +121,5 @@
     @Scripts.Render("~/bundles/bootstrap")
      
 </body>
+
 </html>

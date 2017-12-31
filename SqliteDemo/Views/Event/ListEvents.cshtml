@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h4>Event List</h4>
+<h3>Last Comments:</h3>
 
 <table style="width:100%">
     <tr>
@@ -14,9 +14,6 @@
         <th>Category</th>
         <th>Photo</th>
         <th>Input</th>
-        <th>AllComments</th>
-
-
 
     </tr>
 
@@ -28,6 +25,7 @@
         }
         else
         {
+
             foreach (Events events in (List<Events>)ViewData["eventList"])
             {
                 <tr>
@@ -51,9 +49,6 @@
                         </div>
                     </td>
 
-                  
-
-
 
                     <td>
                         <form method="post" action="~/Event/CommentAdd">
@@ -63,21 +58,26 @@
                             <button type="submit" value="Save" ame="Save" class="btn btn-default">Save</button>
                         </form>
                     </td>
-
-
-                    @{
-                        Comment a = EventPersistence.FindComment(events.EventId);
-                    
-                            <td>@a.Text</td>
-                        
-                    }
-
                 </tr>
+            }
 
+        }
 
-                            }
+    }
+</table>
 
-                        }
+    @{
+        if (ViewData["Comments"] != null)
+        {
+            foreach (Comment comments in (List<Comment>)ViewData["Comments"])
+            {
+
+                <ul class="text-right">
+                    <li>@comments.EventName : @comments.Text </li>
+                </ul>
+            }
+
+        }
+
     }
 
-</table>

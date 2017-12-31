@@ -13,6 +13,7 @@ namespace SqliteDemo.Models.Entity
         public decimal CommentId { get; set; }
         public decimal EventId { get; set; }
         public string Text { get; set; }
+        public string EventName { get; set; }
 
         /*
        * Default constructor - no initialization.

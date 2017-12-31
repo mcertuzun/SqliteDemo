@@ -21,6 +21,13 @@ namespace SqliteDemo.Controllers
         public ActionResult ListEvents()
         {
             List<Events> events = EventPersistence.GetAllEvents();
+            List<Comment> comments = EventPersistence.GetAllComments();
+            if (events != null && comments != null)
+            {
+                ViewData["eventList"] = events;
+                ViewData["Comments"] = comments;
+                return View(events);
+            }
             if (events != null)
             {
                 ViewData["eventList"] = events;
@@ -108,10 +115,11 @@ namespace SqliteDemo.Controllers
             Comment result = EventPersistence.FindComment(a);
            
             List<Comment> list = EventPersistence.GetAllComments();
+            
         
             if (result != null)
             {
-                TempData["Comment"] = list.Contains(result);
+                TempData["Comment"] = list;
                 return View("ListEvents");
             }
             return View("ListEvents");
@@ -132,11 +140,12 @@ namespace SqliteDemo.Controllers
             string tfinal = t4.Replace("|", "&#124");
 
             Comment com = new Comment();
+
             com.EventId = textin.EventId;
-            com.Text = textin.Comment;
+            com.Text = tfinal;
+            com.EventName = EventPersistence.getEventD(textin.EventId).EventName;
             bool result = EventPersistence.AddComment(com);
-
-
+           
             if (result)
             {
                 ViewBag.message = "Commited";
@@ -145,12 +154,8 @@ namespace SqliteDemo.Controllers
             {
                 ViewBag.message = "Couldnt commited";
             }
-            TempData["comment"] = tfinal;
-
-
-
+          
             return RedirectToAction("ListEvents", "Event");
-
         }
 
         /*
@@ -175,11 +180,7 @@ namespace SqliteDemo.Controllers
                 ViewBag.message = "Error: Invalid Request - please try again with choosing a name";
                 return View(new Events());
             }
-
-
             newEvent.UserId = (decimal)Session["AdderID"];
-
-
             bool result = EventManager.AddNewEvent(newEvent);
             if (result)
             {
@@ -190,12 +191,9 @@ namespace SqliteDemo.Controllers
             {
                 ViewBag.message = "That event could not be added";
             }
-
             Events[] events = EventManager.GetAllEvents();
             return View(newEvent);
         }
-
-
         /*
          * This method checks if the newEvent is null after that it checks
          * if the EventId.Length is 0 after that if the result is true

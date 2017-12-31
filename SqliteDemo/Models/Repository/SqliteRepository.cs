@@ -124,7 +124,7 @@ namespace SqliteTest.Models.Repository
                 DoCommand(events);
               UserPersistence.addAdmin();
 
-                string comment = "CREATE TABLE comment (CommentId DECIMAL, EventId DECIMAL ,Text VARCHAR(500), PRIMARY KEY (CommentId), FOREIGN KEY (EventId) REFERENCES events (eventId))";
+                string comment = "CREATE TABLE comment (CommentId DECIMAL, EventId DECIMAL ,Text VARCHAR(500),EventName VARCHAR(50), PRIMARY KEY (CommentId), FOREIGN KEY (EventId) REFERENCES events (eventId))";
                 DoCommand(comment);
                 
                 string sql1 = "INSERT INTO events (eventId, userId, EventName,Category, Date, Information,PhotoURL) VALUES (0, 0, 'Event1', 'opera', '25.12.2016', 'Good one', 'http://www.opera-nice.org/media/image/cms/media/Contenu_statique/salle-opera.jpg');";

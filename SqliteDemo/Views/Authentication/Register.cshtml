@@ -4,7 +4,7 @@
     ViewBag.Title = "Register";
 }
 <style type="text/css">
-   #pp {
+    #pp {
         color: red
     }
 </style>
@@ -12,7 +12,7 @@
 
 <form action="~/Authentication/Register" method="post">
     <div class="input-group">
-        Username: <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" name="Name" value="@Model.Name" >
+        Username: <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" name="Name" value="@Model.Name">
     </div> <p id="pp"> @TempData["Username"]</p>
     <div class="input-group">
         Email: <input type="text" class="form-control" placeholder="example@test.com" aria-describedby="basic-addon1" name="EmailAddress" value="@Model.EmailAddress">
@@ -20,6 +20,6 @@
     <div class="input-group">
         Password: <input class="form-control" placeholder="Username" aria-describedby="basic-addon1" name="Password" value="@Model.Password" type="password">
     </div> <p id="pp">@TempData["Password"]</p>
-         <button type="submit" value="Register" name="Register" class="btn btn-default">Login</button>
- 
+    <button type="submit" value="Register" name="Register" class="btn btn-default">Login</button>
+
 </form>
