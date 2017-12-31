@@ -11,7 +11,7 @@ namespace SqliteTest.Models.Repository
     public class SqliteRepository : IRepository
     {
         // Location of the database file 
-        private string databaseFile = "C:\\Users\\mcan.ertuzun\\MyDatabase.sqlite";
+        private string databaseFile = "C:\\Users\\EFE\\MyDatabase.sqlite";
 
         private SQLiteConnection dbConnection;
 
