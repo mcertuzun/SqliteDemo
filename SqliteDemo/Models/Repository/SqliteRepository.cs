@@ -136,8 +136,7 @@ namespace SqliteTest.Models.Repository
                 string sql3 = "INSERT INTO events (eventId, userId, EventName,Category, Date, Information,PhotoURL) VALUES (2, 0, 'Event3', 'dance', '20.08.2016', 'Sucks', 'noURL');";
                 DoCommand(sql3);
 
-                string user = "INSERT INTO user (id, name, EmailAddress,salt, HashedPassword, IsAdmin,Status) VALUES (1, 'Canefe', 'Canefe@gmail.com', 'dance', '20.08.2016', 'Sucks', 'noURL');";
-                DoCommand(user);
+              
             }
             
            
