@@ -8,11 +8,11 @@ using SqliteDemo.Models.Transaction;
 using SqliteDemo.Models.Repository;
 
 namespace SqliteDemo.Controllers
-{    
-        /*
-        * This class provides to add, delete, update and list events
-        * Also it provides making comments for them
-       */
+{
+    /*
+    * This class provides to add, delete, update and list events
+    * Also it provides making comments for them
+   */
     public class EventController : Controller
     {
         /*
@@ -30,7 +30,7 @@ namespace SqliteDemo.Controllers
             {
                 return View("Home", "Index");
             }
-           
+
         }
 
         /*
@@ -49,7 +49,7 @@ namespace SqliteDemo.Controllers
         [HttpPost]
         public ActionResult SearchEvent(Events value)
         {
-            
+
             List<Events> events = EventPersistence.GetAllEvents();
             if (events != null)
             {
@@ -91,14 +91,36 @@ namespace SqliteDemo.Controllers
                 ViewBag.message = "That event could not be deleted";
                 return View(newEvent);
             }
-         
+
+        }
+        [HttpGet]
+        public ActionResult FindComment()
+        {
+            List<Comment> comments = EventPersistence.GetAllComments();
+            ViewData["Comments"] = comments;
+            return View(new Comment());
         }
 
+        [HttpPost]
+        public ActionResult FindComment(decimal a)
+        {
+
+            Comment result = EventPersistence.FindComment(a);
+           
+            List<Comment> list = EventPersistence.GetAllComments();
+        
+            if (result != null)
+            {
+                TempData["Comment"] = list.Contains(result);
+                return View("ListEvents");
+            }
+            return View("ListEvents");
+        }
         /*
         * This mothod provides to add comments on events
         * It also protected from XSS atacks
         */
-     
+
         [HttpPost]
         public ActionResult CommentAdd(Events textin)
         {
@@ -108,7 +130,7 @@ namespace SqliteDemo.Controllers
             string t3 = t2.Replace(")", "&#41");
             string t4 = t3.Replace("&", "&#38");
             string tfinal = t4.Replace("|", "&#124");
-           
+
             Comment com = new Comment();
             com.EventId = textin.EventId;
             com.Text = textin.Comment;
@@ -124,17 +146,17 @@ namespace SqliteDemo.Controllers
                 ViewBag.message = "Couldnt commited";
             }
             TempData["comment"] = tfinal;
-            
 
-          
-            return RedirectToAction("ListEvents","Event");
+
+
+            return RedirectToAction("ListEvents", "Event");
 
         }
-       
+
         /*
 		 * Handle a GET request for the Add event form.
          */
-    
+
         [HttpGet]
         public ActionResult AddEvent()
         {
@@ -155,13 +177,13 @@ namespace SqliteDemo.Controllers
             }
 
 
-            newEvent.UserId =(decimal) Session["AdderID"];
+            newEvent.UserId = (decimal)Session["AdderID"];
 
 
             bool result = EventManager.AddNewEvent(newEvent);
             if (result)
             {
-                TempData["message"]= "Event added"; 
+                TempData["message"] = "Event added";
                 ViewBag.message = "Event added";
             }
             else

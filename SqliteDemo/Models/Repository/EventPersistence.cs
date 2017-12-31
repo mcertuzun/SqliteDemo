@@ -43,11 +43,59 @@ namespace SqliteDemo.Models.Repository
             */
             string sql = "INSERT INTO comment(CommentId, EventId, Text) VALUES ("
            + CountComment() + ", "
-           +value.EventId+ ", '"
-           +value.Text + "' );";
+           + value.EventId + ", '"
+           + value.Text + "' );";
             RepositoryManager.Repository.DoCommand(sql);
             return true;
         }
+
+        public static List<Comment> GetAllComments()
+        {
+            List<Comment> comments = new List<Comment>();
+
+            string sqlQuery = "select * from comment";
+            List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
+
+            foreach (object[] dataRow in rows)
+            {
+
+                Comment com = new Comment
+                {
+                    CommentId = (decimal)dataRow[0],
+                    EventId = (decimal)dataRow[1],
+                    Text = (string)dataRow[2]
+                };
+                comments.Add(com);
+            }
+
+            return comments;
+        }
+
+        public static Comment FindComment(decimal value)
+        {
+            /*
+            * This method use a SQL format (Insert Into) to insert the event
+            */
+            string sqlQuery = "select * from comment where CommentId=" + value;
+            List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
+            if (rows.Count == 0)
+            {
+                return null;
+            }
+            object[] dataRow = rows[0];
+            Comment com = new Comment
+            {
+                CommentId = (decimal)dataRow[0],
+                EventId = (decimal)dataRow[1],
+                Text = (string)dataRow[2]
+            };
+
+            return com;
+        }
+
+
+
+
 
         /*
          * Retrieve from the database the book matching the EventId field of
@@ -94,7 +142,7 @@ namespace SqliteDemo.Models.Repository
 
             return events;
         }
-        
+
         public static Events getEvent(Events keyEvent)
         {
             string sqlQuery = "select * from events where eventId=" + keyEvent.EventId;
@@ -105,7 +153,7 @@ namespace SqliteDemo.Models.Repository
                 return null;
             }
 
-          
+
             object[] dataRow = rows[0];
 
             Events Event = new Events
@@ -148,24 +196,24 @@ namespace SqliteDemo.Models.Repository
            * This method use a SQL format (insert into) to insert an event
            */
             Event.EventId = Countt();
-           string sql = "INSERT INTO events(eventId, userId, EventName,Category, Date, Information,PhotoURL) VALUES ("
-           + Event.EventId + ", "
-           + Event.UserId + ", '"
-           + Event.EventName + "' ,'"
-           + Event.Category + "' ,'"
-           + Event.Date + "' ,'"
-           + Event.Information + "' ,'"
-           + Event.PhotoURL + "' );";
+            string sql = "INSERT INTO events(eventId, userId, EventName,Category, Date, Information,PhotoURL) VALUES ("
+            + Event.EventId + ", "
+            + Event.UserId + ", '"
+            + Event.EventName + "' ,'"
+            + Event.Category + "' ,'"
+            + Event.Date + "' ,'"
+            + Event.Information + "' ,'"
+            + Event.PhotoURL + "' );";
             RepositoryManager.Repository.DoCommand(sql);
-            
+
             return true;
         }
 
-        
 
-       public static bool CheckEventname(Events keyEvent)
+
+        public static bool CheckEventname(Events keyEvent)
         {
-            
+
             string sqlQuery = "select * from events where EventName='" + keyEvent.EventName + "'";
             List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
 
@@ -197,7 +245,7 @@ namespace SqliteDemo.Models.Repository
         }
 
 
-       
+
         /*
          * This method deletes an event
          */
@@ -217,3 +265,4 @@ namespace SqliteDemo.Models.Repository
         }
     }
 }
+
