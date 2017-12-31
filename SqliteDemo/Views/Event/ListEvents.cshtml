@@ -53,9 +53,9 @@
                     <td>
                         <form method="post" action="~/Event/CommentAdd">
                             <div class="input-group">
-                                Write A Comment <input type="text" class="form-control" placeholder="Comment" aria-describedby="basic-addon1" name="Comment" value="@events.Comment">
+                                Write A Comment <input type="text" class="form-control" placeholder="Comment" name="Comment" value="@events.Comment">
                             </div>
-                            <button type="submit" value="Save" ame="Save" class="btn btn-default">Save</button>
+                            <button type="submit" value="Save" name="Save" class="btn btn-default">Save</button>
                         </form>
                     </td>
                 </tr>
@@ -65,19 +65,22 @@
 
     }
 </table>
-
     @{
         if (ViewData["Comments"] != null)
         {
+            <h2 class="cc"> Comments:</h2>
             foreach (Comment comments in (List<Comment>)ViewData["Comments"])
             {
 
-                <ul class="text-right">
-                    <li>@comments.EventName : @comments.Text </li>
+                <ul>
+                    <li class="tt"> @comments.Text </li>
                 </ul>
             }
 
         }
 
     }
+
+
+    
 

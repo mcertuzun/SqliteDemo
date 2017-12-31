@@ -4,20 +4,15 @@
     ViewBag.Title = "Login";
 }
 
-<style type="text/css">
-    #pp{
-        color:red
-    }
- 
-</style>
+
 <h2>Login</h2>
 
 <form action="~/Authentication/Login" method="post">
     <div class="input-group">
-       Username: <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" name="UserName" value="@Model.UserName">
-    </div><p id="pp"> @TempData["Username"]</p>
+       Username: <input type="text" class="form-control" placeholder="Username" name="UserName" value="@Model.UserName">
+    </div><p class="pp"> @TempData["Username"]</p>
     <div class="input-group">
-        Password: <input class="form-control" placeholder="Password" aria-describedby="basic-addon1" name="Password" value="@Model.Password" type="password">
-    </div><p id="pp"> @TempData["Password"]</p>
-    <button  type="submit" value="Login"ame="Login" class="btn btn-default">Login</button>
+        Password: <input class="form-control" placeholder="Password" name="Password" value="@Model.Password" type="password">
+    </div><p class="pp"> @TempData["Password"]</p>
+    <button  type="submit" value="Login" name="Login" class="btn btn-default">Login</button>
 </form>
